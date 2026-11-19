@@ -1,0 +1,41 @@
+# seofessionals three.js Demos
+
+Sieben Wege, eine flache Architekturzeichnung in ein 3D-Erlebnis zu verwandeln, durch das man scrollt. Diese Seite ist die Übersicht: Sie lädt alle sieben Demos in einem Fenster und lässt Sie zwischen ihnen und ihren Varianten wechseln.
+
+[**Übersicht live ansehen**](https://seofessionals-3js.github.io/seofessionals-threejs-demos/) · am besten auf einem Laptop
+
+## Die sieben Demos
+
+| | Demo | Technik | Was passiert | Code |
+|---|---|---|---|---|
+| 1 | **[seofessionals three.js Demo 1](https://seofessionals-3js.github.io/seofessionals-threejs-demo-1/?dir=a)** | Explosionsaxonometrie | Eine Explosionsaxonometrie setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-1) |
+| 2 | **[seofessionals three.js Demo 2](https://seofessionals-3js.github.io/seofessionals-threejs-demo-2/)** | Schnitt-Scan | Ein Schnitt öffnet sich in die Tiefe, ein Scan macht aus Tusche Material und aus den gezeichneten Sonnenwinkeln echte Sonnenstrahlen. Dann gehen Sie durch den Schnitt hinein. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-2) |
+| 3 | **[seofessionals three.js Demo 3](https://seofessionals-3js.github.io/seofessionals-threejs-demo-3/?dir=a)** | Offener Schnitt | Ein flacher Schnitt zeichnet sich selbst. Das Objektiv öffnet sich, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-3) |
+| 4 | **[seofessionals three.js Demo 4](https://seofessionals-3js.github.io/seofessionals-threejs-demo-4/)** | Bau-Zeitraffer | Sechs Zeichnungen eines Hauses, Phase für Phase. Tauchen Sie in die erste ein und gehen Sie über die Baustelle, während das Haus Woche für Woche wächst. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-4) |
+| 5 | **[seofessionals three.js Demo 5](https://seofessionals-3js.github.io/seofessionals-threejs-demo-5/?dir=a)** | Bauzeitenplan | Scrollen Sie durch den Bauzeitenplan, und das Haus baut sich Balken für Balken selbst, samt Kran. Dann öffnet sich die Haustür. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-5) |
+| 6 | **[seofessionals three.js Demo 6](https://seofessionals-3js.github.io/seofessionals-threejs-demo-6/)** | Kartonmodell | Ein weißes Kartonmodell nachts auf dem Tisch. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-6) |
+| 7 | **[seofessionals three.js Demo 7](https://seofessionals-3js.github.io/seofessionals-threejs-demo-7/a-one-door/)** | Sonnige Ansicht | Eine Vorderansicht, deren Schraffur der echte Schatten ist. Ein Scan macht daraus Backstein, die Sonne wandert, die Tür öffnet sich. | [Code](https://github.com/seofessionals-3js/seofessionals-threejs-demo-7) |
+
+Jede Demo liegt in einem eigenen Repository mit eigener GitHub-Pages-Seite. Die Übersicht lädt sie über relative Pfade (`../seofessionals-threejs-demo-1/` usw.), funktioniert also nur zusammen mit den sieben Demo-Seiten unter derselben Adresse.
+
+## So sind sie gebaut
+
+- three.js von einem CDN, dazu einfaches HTML, CSS und JavaScript. Kein Build-Schritt, nichts zu installieren.
+- Keine Bilddateien und keine 3D-Modelle. Jede Wand, jedes Material und jedes Möbelstück entsteht im Code, deshalb ist jede Demo nur etwa 100 bis 190 KB groß.
+- In fünf der sieben Demos ist die flache Zeichnung das echte 3D-Modell, gesehen durch ein sehr langes Objektiv, das es flach wirken lässt. Erst das Öffnen des Objektivs macht daraus 3D.
+
+## Lokal starten
+
+Alle acht Repositories nebeneinander in einen Ordner klonen, dann in diesem Ordner:
+
+```bash
+python -m http.server 8000
+```
+
+und http://localhost:8000/seofessionals-threejs-demos/ öffnen.
+
+## Herkunft und Lizenz
+
+Basiert auf „Flat to 3D“ aus [flat-to-3d](https://github.com/Sam1983Aing/flat-to-3d) von Samnang Aing, veröffentlicht unter der MIT-Lizenz, und für seofessionals ins Deutsche übersetzt. Die Lizenz liegt unverändert in [LICENSE](LICENSE).
+
+Alle Büros, Häuser, Adressen und Kontaktdaten in der Demo sind erfunden. three.js (MIT) wird von einem CDN geladen, die Schriften Chakra Petch und IBM Plex Mono von Google Fonts (SIL Open Font License).
