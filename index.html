@@ -657,6 +657,18 @@ toggleMatrixBtn.addEventListener('click', () => {
 document.getElementById('close-matrix').addEventListener('click', () => setMatrixOpen(false));
 
 function selectDemo(idx, vIdx = 0, pushHash = true) {
+  const encodedUrl = markActive(idx, vIdx, pushHash);
+  // Release previous WebGL context cleanly before loading next Three.js scene
+  const token = ++loadToken;
+  stage.src = 'about:blank';
+  setTimeout(() => {
+    if (token !== loadToken) return;
+    stage.src = encodedUrl;
+  }, 30);
+}
+
+// the bar, the drawer and the hash for one demo and variant, without reloading the stage
+function markActive(idx, vIdx = 0, pushHash = true) {
   activeIdx = (idx + DEMOS.length) % DEMOS.length;
   const demo = DEMOS[activeIdx];
   activeVarIdx = Math.max(0, Math.min(vIdx, demo.variants.length - 1));
@@ -695,18 +707,26 @@ function selectDemo(idx, vIdx = 0, pushHash = true) {
     const hash = activeVarIdx > 0 ? `#${demo.id}:${activeVarIdx}` : `#${demo.id}`;
     history.replaceState(null, '', hash);
   }
-
-  // Release previous WebGL context cleanly before loading next Three.js scene
-  const token = ++loadToken;
-  stage.src = 'about:blank';
-  setTimeout(() => {
-    if (token !== loadToken) return;
-    stage.src = encodedUrl;
-  }, 30);
+  return encodedUrl;
 }
 
+// the demos hand over to each other by themselves (one continuous show): the bar follows along
+function followStage() {
+  try {
+    const L = stage.contentWindow.location;
+    if (!/threejs-demo-\d/.test(L.pathname)) return;
+    const path = L.pathname.replace(/index\.html$/, ''), dir = new URLSearchParams(L.search).get('dir');
+    let hit = null;
+    DEMOS.forEach((d, i) => d.variants.forEach((v, j) => {
+      const u = new URL(v.url, location.href), vd = u.searchParams.get('dir');
+      if (u.pathname.replace(/index\.html$/, '') === path && (!vd || !dir || vd === dir) && !hit) hit = [i, j];
+    }));
+    if (hit && (hit[0] !== activeIdx || hit[1] !== activeVarIdx)) markActive(hit[0], hit[1]);
+  } catch {}
+}
 stage.addEventListener('load', () => {
   try { stage.contentWindow.focus(); } catch {}
+  followStage();
 });
 
 document.getElementById('prev-btn').addEventListener('click', () => selectDemo(activeIdx - 1, 0));
