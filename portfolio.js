@@ -8,9 +8,10 @@
   // every stop of the show, in order. path is from the site root (works on GitHub Pages and locally).
   // dur: seconds to play the page from top to bottom, start: seconds to let the page's own intro run first.
   // A demo with its own play button (btn) is started with that button and keeps its own pace; on() says whether it
-  // is running, weeks: the end is Demo 5's last week rather than the bottom of the page.
+  // is running, weeks: the end is the last week of Demo 5's programme (38) rather than the bottom of the page.
+  // Demo 4 and Demo 5 (both Projekt Steininger) share the same Abspielen button.
   const D4 = { btn: '#playBtn', on: b => b.getAttribute('aria-pressed') === 'true' };
-  const D5 = { btn: '[data-action="play"]', on: b => b.classList.contains('on'), weeks: true, pillTop: 66 };
+  const D5 = { ...D4, weeks: 38, pillTop: 140 };
   const SHOW = [
     { demo: 1, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
     { demo: 2, path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 88, start: 4 },
@@ -71,7 +72,7 @@
     card.querySelector('.t').textContent = 'three.js Demo ' + s.demo;
     card.querySelector('.s').textContent = s.name;
   };
-  if (ST_PILL()) Object.assign(pill.style, { top: ST_PILL() + 'px', bottom: 'auto' });   // Demo 5 keeps its plan at the bottom
+  if (ST_PILL()) Object.assign(pill.style, { top: ST_PILL() + 'px', bottom: 'auto' });   // Demo 5 keeps its plan at the bottom, the pill goes under its toolbar
   const mount = () => { document.body.appendChild(card); document.body.appendChild(pill); };
   if (document.body) mount(); else addEventListener('DOMContentLoaded', mount);
 
@@ -80,8 +81,7 @@
   const say = (txt, paused) => { const sp = pill.querySelector('span'); if (sp.textContent !== txt) sp.textContent = txt; pill.classList.toggle('paused', !!paused); };
   const maxY = () => Math.max(0, (document.scrollingElement || document.documentElement).scrollHeight - innerHeight);
   const st5 = () => window.__state;
-  const WEEKS = 14;
-  const atEnd = () => ST.weeks ? !!st5() && st5().WK >= WEEKS - 0.002 : maxY() > 50 && scrollY >= maxY() - 3;
+  const atEnd = () => ST.weeks ? !!st5() && st5().WK >= ST.weeks - 0.002 : maxY() > 50 && scrollY >= maxY() - 3;
   const setPlaying = v => {
     playing = v;
     if (v && !ST.btn) { u = maxY() > 0 ? scrollY / maxY() : 0; }
