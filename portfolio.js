@@ -7,15 +7,19 @@
 (() => {
   // every stop of the show, in order. path is from the site root (works on GitHub Pages and locally).
   // dur: seconds to play the page from top to bottom, start: seconds to let the page's own intro run first.
+  // A demo with its own play button (btn) is started with that button and keeps its own pace; on() says whether it
+  // is running, weeks: the end is Demo 5's last week rather than the bottom of the page.
+  const D4 = { btn: '#playBtn', on: b => b.getAttribute('aria-pressed') === 'true' };
+  const D5 = { btn: '[data-action="play"]', on: b => b.classList.contains('on'), weeks: true, pillTop: 66 };
   const SHOW = [
     { demo: 1, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
-    { demo: 2, path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 92, start: 4 },
+    { demo: 2, path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 88, start: 4 },
     { demo: 3, path: '/threejs-demo-3/', q: 'dir=a', name: 'Objektiv öffnen', dur: 48, start: 5 },
-    { demo: 3, path: '/threejs-demo-3/', q: 'dir=c', name: 'Die Treppe hinab', dur: 48, start: 5 },
-    { demo: 4, path: '/threejs-demo-4/', name: 'Achtunddreißig Wochen', dur: 70, start: 4 },
-    { demo: 5, path: '/threejs-demo-5/', q: 'dir=a&wk=0', name: 'Der Bauzeitenplan', mode: 'build', start: 3, pillTop: 66 },
-    { demo: 5, path: '/threejs-demo-5/', q: 'dir=b&wk=0', name: 'Plan im Maßstab 1:1', mode: 'build', start: 3, pillTop: 66 },
-    { demo: 5, path: '/threejs-demo-5/', q: 'dir=c&wk=0', name: 'Baustellenkamera', mode: 'build', start: 3, pillTop: 66 },
+    { demo: 3, path: '/threejs-demo-3/', q: 'dir=c', name: 'Die Treppe hinab', dur: 40, start: 5 },
+    { demo: 4, path: '/threejs-demo-4/', name: 'Projekt Steininger', start: 4, ...D4 },
+    { demo: 5, path: '/threejs-demo-5/', q: 'dir=a&wk=0', name: 'Der Bauzeitenplan', start: 3, ...D5 },
+    { demo: 5, path: '/threejs-demo-5/', q: 'dir=b&wk=0', name: 'Plan im Maßstab 1:1', start: 3, ...D5 },
+    { demo: 5, path: '/threejs-demo-5/', q: 'dir=c&wk=0', name: 'Baustellenkamera', start: 3, ...D5 },
     { demo: 6, path: '/threejs-demo-6/', name: 'Es beginnt auf dem Tisch', dur: 62, start: 4 },
     { demo: 7, path: '/threejs-demo-7/a-one-door/', name: 'Eine Tür', dur: 34, start: 4 },
     { demo: 7, path: '/threejs-demo-7/b-the-row/', name: 'Die Reihe', dur: 30, start: 4 },
@@ -77,16 +81,16 @@
   const maxY = () => Math.max(0, (document.scrollingElement || document.documentElement).scrollHeight - innerHeight);
   const st5 = () => window.__state;
   const WEEKS = 14;
-  const atEnd = () => ST.mode === 'build' ? !!st5() && st5().WK >= WEEKS - 0.002 : maxY() > 50 && scrollY >= maxY() - 3;
+  const atEnd = () => ST.weeks ? !!st5() && st5().WK >= WEEKS - 0.002 : maxY() > 50 && scrollY >= maxY() - 3;
   const setPlaying = v => {
     playing = v;
-    if (v && ST.mode !== 'build') { u = maxY() > 0 ? scrollY / maxY() : 0; }
-    if (v && ST.mode === 'build') pressBuild();
+    if (v && !ST.btn) { u = maxY() > 0 ? scrollY / maxY() : 0; }
+    if (v && ST.btn) pressPlay();
   };
-  function pressBuild() {
-    // Demo 5 builds week by week with its own play button: press it if it isn't running yet
-    const b = document.querySelector('[data-action="play"]');
-    if (b && !b.classList.contains('on')) b.click();
+  function pressPlay() {
+    // the demo's own play button: press it if it isn't running yet
+    const b = document.querySelector(ST.btn);
+    if (b && !ST.on(b)) b.click();
   }
   const takeOver = e => {
     if (e.target instanceof Element && e.target.closest('#pf-pill')) return;
@@ -109,7 +113,7 @@
     const started = T > (ST.start ?? 4);
     // play: an even glide down the page, easing in over the first two seconds
     if (playing && started && endT < 0) {
-      if (ST.mode === 'build') { if (!built) { built = true; pressBuild(); } }
+      if (ST.btn) { if (!built) { built = true; pressPlay(); } }
       else {
         if (u == null) u = maxY() > 0 ? scrollY / maxY() : 0;
         const ramp = Math.min(1, (T - (ST.start ?? 4)) / 2);
