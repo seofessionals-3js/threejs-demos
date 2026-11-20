@@ -16,12 +16,18 @@ Sieben Wege, eine flache Architekturzeichnung in ein 3D-Erlebnis zu verwandeln, 
 | 6 | **[three.js Demo 6](https://seofessionals-3js.github.io/threejs-demo-6/)** | Kartonmodell | Ein weißes Kartonmodell nachts auf dem Tisch. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus. | [Code](https://github.com/seofessionals-3js/threejs-demo-6) |
 | 7 | **[three.js Demo 7](https://seofessionals-3js.github.io/threejs-demo-7/a-one-door/)** | Sonnige Ansicht | Eine Vorderansicht, deren Schraffur der echte Schatten ist. Ein Scan macht daraus Backstein, die Sonne wandert, die Tür öffnet sich. | [Code](https://github.com/seofessionals-3js/threejs-demo-7) |
 
+## Eine durchgehende Schau
+
+Die Demos laufen als eine Schau nacheinander. Wenn eine Demo oder eine ihrer Varianten zu Ende gespielt ist, schließt ein Übergang das Bild, und die nächste lädt und spielt sich von selbst ab: Demo 1 mit A, B und C, dann Demo 2, Demo 3 mit A und C, Demo 4, Demo 5 mit A, B und C, Demo 6, Demo 7 mit allen drei Seiten und danach wieder Demo 1. Eigenes Scrollen, Tippen oder Klicken übernimmt jederzeit, der Knopf unten in der Mitte gibt die Steuerung zurück. In der Übersicht folgt die Leiste oben der laufenden Demo.
+
+Das steuert [`portfolio.js`](portfolio.js) in diesem Repository. Die Demos 2 bis 7 binden es über `/threejs-demos/portfolio.js` ein, Demo 1 übergibt am Ende selbst an Demo 2. `?autoplay=1` startet eine Demo von selbst, `?noshow` schaltet die Schau für eine Seite ab.
+
 Jede Demo liegt in einem eigenen Repository mit eigener GitHub-Pages-Seite. Die Übersicht lädt sie über relative Pfade (`../threejs-demo-1/` usw.), funktioniert also nur zusammen mit den sieben Demo-Seiten unter derselben Adresse.
 
 ## So sind sie gebaut
 
 - three.js von einem CDN, dazu einfaches HTML, CSS und JavaScript. Kein Build-Schritt, nichts zu installieren.
-- Keine Bilddateien und keine 3D-Modelle. Jede Wand, jedes Material und jedes Möbelstück entsteht im Code, deshalb ist jede Demo nur etwa 100 bis 190 KB groß.
+- Keine Bilddateien und keine 3D-Modelle. Jede Wand, jedes Material und jedes Möbelstück entsteht im Code, auch die Holz- und Ziegeloberflächen werden beim Laden auf Canvas gemalt, deshalb ist jede Demo nur etwa 100 bis 190 KB groß.
 - In fünf der sieben Demos ist die flache Zeichnung das echte 3D-Modell, gesehen durch ein sehr langes Objektiv, das es flach wirken lässt. Erst das Öffnen des Objektivs macht daraus 3D.
 
 ## Lokal starten
