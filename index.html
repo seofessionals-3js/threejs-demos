@@ -5,25 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>three.js Demos</title>
 <meta name="description" content="three.js Demos: sieben Wege, eine flache Architekturzeichnung in ein 3D-Scroll-Erlebnis zu verwandeln, in reinem three.js.">
-<link rel="preload" href="fonts/BBHBogle-Regular.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="fonts/Arimo-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+<meta name="theme-color" content="#f6f5f1">
+<link rel="preload" href="fonts/BBHBogle-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Arimo-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  /* Brand: forest green, lime and paper; BBH Bogle for headlines, Arimo for everything that is read */
-  @font-face { font-family: 'BBH Bogle'; src: url('fonts/BBHBogle-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'Arimo'; src: url('fonts/Arimo-VariableFont_wght.ttf') format('truetype'); font-weight: 400 700; font-style: normal; font-display: swap; }
+  /* The plan chest: neutral paper and graphite. The one colour on the page is the identity colour of the demo
+     that is running (--accent), so the frame never competes with the seven drawing media inside it. */
+  @font-face { font-family: 'BBH Bogle'; src: url('fonts/BBHBogle-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Arimo'; src: url('fonts/Arimo-VariableFont_wght.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
   :root {
-    --bg: #0b1a12;
-    --panel: #10241a;
-    --card: #142d20;
-    --paper: #f1f0e6;
-    --ink: #f1f0e6;
-    --mute: #a3b3a2;
-    --soft: #d3dacb;
-    --line: rgba(241, 240, 230, 0.16);
-    --line-strong: rgba(241, 240, 230, 0.34);
-    --accent: #c4f03e;      /* lime: the accent on dark */
-    --accent-ink: #10241a;  /* text on lime */
-    --leaf: #3d7607;        /* the accent on paper */
+    --bg: #eceae4;
+    --panel: #f6f5f1;
+    --card: #fbfaf7;
+    --ink: #1d1d1b;
+    --mute: #6b6a65;
+    --soft: #45443f;
+    --line: rgba(29, 29, 27, 0.14);
+    --line-strong: rgba(29, 29, 27, 0.3);
+    --hover: rgba(29, 29, 27, 0.06);
+    --accent: #1e4a8c;      /* identity colour of the running demo, set from DEMOS */
+    --accent-on: #f3f6fb;   /* text on the identity colour */
+    --accent-ink: #1e4a8c;  /* the identity colour, dark enough for small text on paper */
+    --sheet: #1e4a8c;       /* the sheet of the running demo: shown behind the stage while it loads */
     --display: 'BBH Bogle', 'Arimo', 'Arial Black', sans-serif;
     --sans: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
     --mono: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
@@ -42,8 +45,10 @@
     -webkit-font-smoothing: antialiased;
     font-synthesis: none;
   }
+  button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--accent-ink); outline-offset: -2px; }
 
-  /* ── TOP CAD SWITCHER BAR ── */
+  /* ── TOP BAR: the title block of the chest ── */
   #master-bar {
     position: fixed;
     top: 0;
@@ -65,37 +70,39 @@
 
   .brand-cell {
     display: flex;
+    flex: none;
     align-items: center;
     gap: 8px;
     height: 100%;
     padding: 0 14px;
+    border: 0;
     border-right: 1px solid var(--line);
-    font: 600 11px/1 var(--mono);
+    font: 700 11px/1 var(--mono);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     white-space: nowrap;
     cursor: pointer;
     color: var(--ink);
     background: transparent;
-    border-top: 0;
-    border-bottom: 0;
-    border-left: 0;
   }
-  .brand-cell:hover {
-    background: rgba(255, 255, 255, 0.05);
-  }
+  .brand-cell:hover { background: var(--hover); }
+  .brand-cell.on { background: var(--ink); color: var(--panel); }
+  .brand-cell.on .tag { color: rgba(246, 245, 241, 0.6); }
   .brand-cell .dot {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     background: var(--accent);
     display: inline-block;
+    transition: background 0.3s;
   }
+  .brand-cell .tag { color: var(--mute); font-weight: 500; }
 
-  /* 01..07 Number Strip */
+  /* 01..07 number strip */
   .num-strip {
     display: flex;
     align-items: stretch;
     height: 100%;
+    min-width: 0;
     border-right: 1px solid var(--line);
     overflow-x: auto;
     scrollbar-width: none;
@@ -104,14 +111,17 @@
 
   .demo-btn {
     appearance: none;
+    flex: none;
     border: 0;
     border-right: 1px solid var(--line);
     background: transparent;
     color: var(--mute);
     padding: 0 11px;
+    min-width: 38px;
     height: 100%;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     font: 500 11px/1 var(--mono);
     font-variant-numeric: tabular-nums;
@@ -122,11 +132,7 @@
     position: relative;
   }
   .demo-btn:last-child { border-right: 0; }
-  .demo-btn .n {
-    font-weight: 600;
-    color: var(--ink);
-    opacity: 0.75;
-  }
+  .demo-btn .n { font-weight: 700; color: var(--ink); opacity: 0.72; }
   .demo-btn .lbl {
     font-family: var(--sans);
     font-weight: 600;
@@ -137,29 +143,24 @@
   @media (min-width: 1440px) {
     .demo-btn .lbl { display: inline; }
   }
-  .demo-btn:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-  }
-  .demo-btn.active {
-    background: var(--paper);
-    color: var(--accent-ink);
-  }
-  .demo-btn.active .n {
-    color: var(--leaf);
-    opacity: 1;
-  }
-  .demo-btn.active::after {
+  /* the little colour tick under every number is the sheet of that demo */
+  .demo-btn::after {
     content: '';
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2.5px;
-    background: var(--leaf);
+    left: 9px;
+    right: 9px;
+    bottom: 5px;
+    height: 3px;
+    background: var(--c);
+    opacity: 0.85;
+    transition: left 0.15s, right 0.15s, bottom 0.15s, height 0.15s;
   }
+  .demo-btn:hover { background: var(--hover); color: var(--ink); }
+  .demo-btn.active { background: var(--c); color: var(--c-on); }
+  .demo-btn.active .n { color: var(--c-on); opacity: 1; }
+  .demo-btn.active::after { opacity: 0; }
 
-  /* Active Demo Title + Sub-variants */
+  /* Active demo title + its variants */
   .active-meta {
     display: flex;
     align-items: center;
@@ -168,10 +169,10 @@
     height: 100%;
     min-width: 0;
     flex: 1;
-    overflow-x: auto;
-    scrollbar-width: none;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
   }
-  .active-meta::-webkit-scrollbar { display: none; }
 
   .active-title {
     display: flex;
@@ -180,8 +181,8 @@
     white-space: nowrap;
   }
   .active-title .code {
-    font: 600 10px/1 var(--mono);
-    color: var(--accent);
+    font: 700 10px/1 var(--mono);
+    color: var(--accent-ink);
     letter-spacing: 0.1em;
   }
   .active-title .name {
@@ -189,6 +190,15 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
+  .active-title .medium {
+    font: 500 11px/1 var(--sans);
+    color: var(--mute);
+    letter-spacing: 0.02em;
+  }
+  /* room in the bar: the drawing code only on very wide screens, the medium gives way to the tab labels */
+  .active-title .code { display: none; }
+  @media (min-width: 1440px) and (max-width: 1759px) { .active-title .medium { display: none; } }
+  @media (min-width: 1760px) { .active-title .code { display: inline; } }
 
   .variant-group {
     display: inline-flex;
@@ -201,30 +211,28 @@
   .var-pill {
     appearance: none;
     border: 1px solid var(--line-strong);
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--mute);
+    background: transparent;
+    color: var(--soft);
     font: 500 10px/1 var(--mono);
     letter-spacing: 0.07em;
     text-transform: uppercase;
     padding: 5px 8px;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.12s;
+    transition: color 0.12s, border-color 0.12s, background 0.12s;
   }
-  .var-pill:hover {
-    color: var(--ink);
-    border-color: var(--ink);
-  }
+  .var-pill:hover { color: var(--ink); border-color: var(--ink); }
   .var-pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-ink);
+    background: var(--c, var(--accent));
+    border-color: var(--c, var(--accent));
+    color: var(--c-on, var(--accent-on));
     font-weight: 700;
   }
 
-  /* Right Controls */
+  /* Right controls */
   .bar-actions {
     display: flex;
+    flex: none;
     align-items: stretch;
     height: 100%;
     margin-left: auto;
@@ -237,27 +245,23 @@
     background: transparent;
     color: var(--ink);
     padding: 0 12px;
+    min-width: 40px;
     font: 500 10.5px/1 var(--mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     white-space: nowrap;
     text-decoration: none;
   }
   .act-btn:last-child { border-right: 0; }
-  .act-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-  .act-btn.on {
-    background: var(--accent);
-    color: var(--accent-ink);
-    font-weight: 700;
-  }
+  .act-btn:hover { background: var(--hover); }
+  .act-btn.on { background: var(--ink); color: var(--panel); font-weight: 700; }
 
-  /* Floating tab when bar is hidden */
+  /* Floating tab when the bar is hidden */
   #show-bar-tab {
     position: fixed;
     top: 0;
@@ -268,8 +272,8 @@
     color: var(--ink);
     border: 1px solid var(--line-strong);
     border-top: 0;
-    padding: 5px 12px;
-    font: 600 10px/1 var(--mono);
+    padding: 6px 12px;
+    font: 700 10px/1 var(--mono);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     cursor: pointer;
@@ -286,8 +290,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--paper);
-    transition: top 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    background: var(--sheet);
+    transition: top 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
   }
   body.bar-collapsed #stage-wrap {
     top: 0;
@@ -298,20 +302,20 @@
     height: 100%;
     border: 0;
     display: block;
-    background: var(--paper);
+    background: transparent;
   }
 
-  /* ── ALL-07 SHEET DRAWER / MATRIX OVERLAY ── */
+  /* ── THE DRAWER: seven sheets, each with the colour card of its medium ── */
   #matrix-drawer {
     position: fixed;
     top: var(--bar-h);
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(11, 26, 18, 0.96);
-    backdrop-filter: blur(10px);
+    background: var(--bg);
     z-index: 950;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 28px 32px 48px;
     display: none;
   }
@@ -323,6 +327,7 @@
     max-width: 1360px;
     margin: 0 auto 20px;
     display: flex;
+    gap: 16px;
     justify-content: space-between;
     align-items: flex-end;
     border-bottom: 1px solid var(--line-strong);
@@ -336,48 +341,76 @@
   }
   .matrix-head p {
     margin: 6px 0 0;
-    font: 400 12px/1.4 var(--mono);
-    color: var(--mute);
+    max-width: 68ch;
+    font: 400 13px/1.45 var(--sans);
+    color: var(--soft);
   }
 
   .matrix-grid {
     max-width: 1360px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 14px;
   }
 
   .sheet-card {
     background: var(--card);
     border: 1px solid var(--line-strong);
-    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    transition: border-color 0.14s, transform 0.14s;
+    transition: border-color 0.14s, box-shadow 0.14s;
     position: relative;
   }
-  .sheet-card:hover {
-    border-color: var(--ink);
+  .sheet-card:hover { border-color: var(--ink); }
+  .sheet-card.active { border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); }
+
+  /* the colour card: the sheet, a few drawn lines in the medium's line colour, and its one accent */
+  .swatch {
+    appearance: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 0;
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--sw-sheet);
+    color: var(--sw-line);
+    cursor: pointer;
+    text-align: left;
   }
-  .sheet-card.active {
-    border-color: var(--accent);
-    box-shadow: inset 0 0 0 1px var(--accent);
+  .swatch .txt { min-width: 0; }
+  .swatch .m { display: block; font: 700 10px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+  .swatch .h { display: block; margin-top: 3px; font: 500 11.5px/1.2 var(--sans); opacity: 0.86; }
+  .swatch .plan {
+    flex: none;
+    align-self: flex-start;
+    position: relative;
+    width: 92px;
+    height: 34px;
+    border: 1.5px solid var(--sw-line);
+    border-left-width: 6px;
+    background:
+      linear-gradient(var(--sw-line), var(--sw-line)) 0 50% / 100% 1px no-repeat,
+      linear-gradient(var(--sw-line), var(--sw-line)) 78% 0 / 1px 100% no-repeat;
   }
+  .swatch .plan::after { content: ''; position: absolute; top: -1.5px; bottom: -1.5px; left: 46px; width: 13px; background: var(--sw-accent); }
+
+  .sheet-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 
   .sheet-card-top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font: 600 11px/1 var(--mono);
+    gap: 10px;
+    font: 600 10.5px/1 var(--mono);
     color: var(--mute);
     letter-spacing: 0.1em;
   }
-  .sheet-card-top .num {
-    color: var(--accent);
-    font-size: 12px;
-  }
+  .sheet-card-top .num { color: var(--c-ink); font-size: 12px; font-weight: 700; }
 
   .sheet-card h3 {
     margin: 0;
@@ -387,14 +420,12 @@
     color: var(--ink);
     cursor: pointer;
   }
-  .sheet-card h3:hover {
-    color: var(--accent);
-  }
+  .sheet-card h3:hover { color: var(--c-ink); }
 
   .sheet-card p {
     margin: 0;
     font-size: 13px;
-    line-height: 1.45;
+    line-height: 1.5;
     color: var(--soft);
     flex: 1;
   }
@@ -403,13 +434,30 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    padding-top: 6px;
+    padding-top: 10px;
     border-top: 1px solid var(--line);
   }
+  .sheet-vars .var-pill { padding: 7px 9px; }
 
   @media (max-width: 900px) {
     .active-meta { display: none; }
     #matrix-drawer { padding: 18px 16px 36px; }
+  }
+  /* phone: number strip in the middle, everything else folds into the drawer */
+  @media (max-width: 700px) {
+    .brand-cell { padding: 0 10px; gap: 7px; letter-spacing: 0.08em; }
+    .brand-cell .tag { display: none; }
+    .num-strip { flex: 1; }
+    .demo-btn { flex: 1 0 30px; min-width: 0; padding: 0 2px; }
+    .demo-btn::after { left: 5px; right: 5px; }
+    #prev-btn, #next-btn, #open-new { display: none; }
+    .act-btn .long { display: none; }
+    .matrix-head { flex-direction: column; align-items: flex-start; }
+    .matrix-head h2 { font-size: 20px; }
+    .matrix-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #master-bar, #show-bar-tab, #stage-wrap, .demo-btn::after { transition: none; }
   }
 </style>
 </head>
@@ -419,7 +467,7 @@
   <button class="brand-cell" id="toggle-matrix" title="Alle sieben Techniken zeigen">
     <span class="dot"></span>
     <span>THREE.JS // 07</span>
-    <span style="color:var(--mute)">[ÜBERSICHT]</span>
+    <span class="tag">[ÜBERSICHT]</span>
   </button>
 
   <nav class="num-strip" id="num-strip" aria-label="Techniken 01 bis 07"></nav>
@@ -428,15 +476,16 @@
     <div class="active-title">
       <span class="code" id="cur-code">PURLIN // AXO-01</span>
       <span class="name" id="cur-name">three.js Demo 1</span>
+      <span class="medium" id="cur-medium"></span>
     </div>
     <div class="variant-group" id="cur-variants"></div>
   </div>
 
   <div class="bar-actions">
-    <button class="act-btn" id="prev-btn" title="Vorherige Demo">←</button>
-    <button class="act-btn" id="next-btn" title="Nächste Demo">→</button>
+    <button class="act-btn" id="prev-btn" title="Vorherige Demo" aria-label="Vorherige Demo">←</button>
+    <button class="act-btn" id="next-btn" title="Nächste Demo" aria-label="Nächste Demo">→</button>
     <a class="act-btn" id="open-new" href="#" target="_blank" rel="noopener" title="Aktuelle Demo in einem eigenen Tab öffnen">ÖFFNEN ↗</a>
-    <button class="act-btn" id="hide-bar-btn" title="Leiste einklappen für die Vollbildansicht">▴ LEISTE</button>
+    <button class="act-btn" id="hide-bar-btn" title="Leiste einklappen für die Vollbildansicht" aria-label="Leiste einklappen">▴<span class="long">&nbsp;LEISTE</span></button>
   </div>
 </header>
 
@@ -446,10 +495,10 @@
   <div class="matrix-head">
     <div>
       <h2>THREE.JS // SIEBEN TECHNIKEN [01 BIS 07]</h2>
-      <p>Wählen Sie eine Technik oder eine ihrer Varianten. Jede läuft live in Ihrem Browser. Am besten auf einem Laptop.</p>
+      <p>Sieben Häuser, sieben Zeichenmedien: Jede Technik ist in ihrem eigenen Planmedium gezeichnet, von der Blaupause bis zur Kreide auf Tonpapier. Wählen Sie eine Technik oder eine ihrer Varianten. Jede läuft live in Ihrem Browser.</p>
     </div>
     <div style="display:flex; gap:10px;">
-      <button class="act-btn on" id="close-matrix" style="padding:8px 14px;">SCHLIESSEN ✕</button>
+      <button class="act-btn on" id="close-matrix" style="padding:9px 14px;">SCHLIESSEN ✕</button>
     </div>
   </div>
   <div class="matrix-grid" id="matrix-grid"></div>
@@ -463,10 +512,14 @@
 const DEMOS = [
   {
     "id": "01",
+    "medium": "Blaupause",
+    "house": "Haus Karbon",
+    "sheet": "#1e4a8c", "line": "#f3f6fb", "mark": "#f4b63f",
+    "accent": "#1e4a8c", "on": "#f3f6fb", "ink": "#1e4a8c",
     "code": "PURLIN // AXO-01",
     "title": "three.js Demo 1",
     "short": "Explosionsaxo",
-    "desc": "Eine Explosionsaxonometrie setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein.",
+    "desc": "Eine Explosionsaxonometrie als Blaupause setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein.",
     "variants": [
       {
         "label": "A · Planblatt",
@@ -484,6 +537,10 @@ const DEMOS = [
   },
   {
     "id": "02",
+    "medium": "Tusche auf Transparentpapier",
+    "house": "Haus Linie",
+    "sheet": "#e9e7e0", "line": "#1b1c1e", "mark": "#e07a12",
+    "accent": "#e07a12", "on": "#1b1c1e", "ink": "#a85400",
     "code": "COTA // SWP-02",
     "title": "three.js Demo 2",
     "short": "Schnitt-Scan",
@@ -497,6 +554,10 @@ const DEMOS = [
   },
   {
     "id": "03",
+    "medium": "Aquarell auf Bütten",
+    "house": "Casa Dos, Deià",
+    "sheet": "#f3ebdb", "line": "#3b2f27", "mark": "#cf7d68",
+    "accent": "#1b7a8c", "on": "#f9f3e7", "ink": "#17667a",
     "code": "POCHÉ // SEC-03",
     "title": "three.js Demo 3",
     "short": "Offener Schnitt",
@@ -514,6 +575,10 @@ const DEMOS = [
   },
   {
     "id": "04",
+    "medium": "Bauzeichnung nach Norm",
+    "house": "Projekt Steininger",
+    "sheet": "#f5f4ef", "line": "#17191c", "mark": "#d43a2a",
+    "accent": "#d43a2a", "on": "#fbfaf7", "ink": "#bf2f20",
     "code": "PROJEKT STEININGER // A-901",
     "title": "three.js Demo 4",
     "short": "Bau-Zeitraffer",
@@ -527,6 +592,10 @@ const DEMOS = [
   },
   {
     "id": "05",
+    "medium": "Lichtpause mit Textmarker",
+    "house": "Projekt Steininger",
+    "sheet": "#eeedea", "line": "#3d3492", "mark": "#ffd23c",
+    "accent": "#3d3492", "on": "#eeedea", "ink": "#3d3492",
     "code": "PROJEKT STEININGER // A-905",
     "title": "three.js Demo 5",
     "short": "Bauzeitenplan",
@@ -548,10 +617,14 @@ const DEMOS = [
   },
   {
     "id": "06",
+    "medium": "Kartonmodell auf der Schneidematte",
+    "house": "Haus Passepartout",
+    "sheet": "#2a7a57", "line": "#f5f2ea", "mark": "#f2a531",
+    "accent": "#2a7a57", "on": "#f5f2ea", "ink": "#20674a",
     "code": "ATELIER 1:100 // MDL-06",
     "title": "three.js Demo 6",
     "short": "Kartonmodell",
-    "desc": "Ein weißes Kartonmodell nachts auf dem Schreibtisch. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus, mit der Schreibtischlampe als Sonne.",
+    "desc": "Ein weißes Kartonmodell abends auf der Schneidematte. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus, mit der Schreibtischlampe als Sonne.",
     "variants": [
       {
         "label": "Demo",
@@ -561,10 +634,14 @@ const DEMOS = [
   },
   {
     "id": "07",
+    "medium": "Trois crayons auf Tonpapier",
+    "house": "No. 7 Kreidegasse",
+    "sheet": "#dfd2ba", "line": "#2a2522", "mark": "#a5432b",
+    "accent": "#a5432b", "on": "#fcf9f2", "ink": "#8f3620",
     "code": "ALBION ROW // ELV-07",
     "title": "three.js Demo 7",
     "short": "Sonnige Ansicht",
-    "desc": "Eine Vorderansicht, deren Schraffur der echte Schatten ist. Ein Scan verwandelt sie in Backstein, die Sonne wandert, die Tür öffnet sich, und Sie gehen hinein.",
+    "desc": "Eine Vorderansicht in Kreide auf Tonpapier, deren Schraffur der echte Schatten ist. Ein Scan verwandelt sie in Backstein, die Sonne wandert, die Tür öffnet sich, und Sie gehen hinein.",
     "variants": [
       {
         "label": "A · Eine Tür",
@@ -585,7 +662,11 @@ const DEMOS = [
 const numStrip = document.getElementById('num-strip');
 const curCode = document.getElementById('cur-code');
 const curName = document.getElementById('cur-name');
+const curMedium = document.getElementById('cur-medium');
 const curVariants = document.getElementById('cur-variants');
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+// every button and card carries the colours of its own demo
+const tint = (el, d) => { el.style.setProperty('--c', d.accent); el.style.setProperty('--c-on', d.on); el.style.setProperty('--c-ink', d.ink); };
 const openNew = document.getElementById('open-new');
 const stage = document.getElementById('stage');
 const matrixDrawer = document.getElementById('matrix-drawer');
@@ -601,7 +682,9 @@ DEMOS.forEach((d, idx) => {
   const btn = document.createElement('button');
   btn.className = 'demo-btn';
   btn.dataset.idx = idx;
-  btn.title = `${d.id} · ${d.title}`;
+  btn.title = `${d.id} · ${d.title} · ${d.medium}`;
+  btn.setAttribute('aria-label', `Demo ${Number(d.id)}: ${d.short}, ${d.medium}`);
+  tint(btn, d);
   btn.innerHTML = `<span class="n">${d.id}</span><span class="lbl">${d.short}</span>`;
   btn.addEventListener('click', () => selectDemo(idx, 0));
   numStrip.appendChild(btn);
@@ -612,6 +695,23 @@ DEMOS.forEach((d, idx) => {
   const card = document.createElement('div');
   card.className = 'sheet-card';
   card.dataset.idx = idx;
+  tint(card, d);
+
+  // the colour card of the medium: sheet, line and the one accent
+  const sw = document.createElement('button');
+  sw.className = 'swatch';
+  sw.type = 'button';
+  sw.title = `${d.title} öffnen`;
+  sw.style.setProperty('--sw-sheet', d.sheet);
+  sw.style.setProperty('--sw-line', d.line);
+  sw.style.setProperty('--sw-accent', d.mark);
+  sw.innerHTML = '<span class="txt"><span class="m"></span><span class="h"></span></span><span class="plan" aria-hidden="true"></span>';
+  sw.querySelector('.m').textContent = d.medium;
+  sw.querySelector('.h').textContent = d.house;
+  sw.addEventListener('click', () => { selectDemo(idx, 0); setMatrixOpen(false); });
+
+  const body = document.createElement('div');
+  body.className = 'sheet-body';
 
   const top = document.createElement('div');
   top.className = 'sheet-card-top';
@@ -642,14 +742,17 @@ DEMOS.forEach((d, idx) => {
     vars.appendChild(vp);
   });
 
-  card.append(top, h3, p, vars);
+  body.append(top, h3, p, vars);
+  card.append(sw, body);
   matrixGrid.appendChild(card);
 });
 
 function setMatrixOpen(open) {
   matrixDrawer.classList.toggle('open', open);
   toggleMatrixBtn.classList.toggle('on', open);
+  toggleMatrixBtn.setAttribute('aria-expanded', String(open));
 }
+addEventListener('keydown', (e) => { if (e.key === 'Escape' && matrixDrawer.classList.contains('open')) setMatrixOpen(false); });
 
 toggleMatrixBtn.addEventListener('click', () => {
   setMatrixOpen(!matrixDrawer.classList.contains('open'));
@@ -675,9 +778,18 @@ function markActive(idx, vIdx = 0, pushHash = true) {
   const variant = demo.variants[activeVarIdx];
   const encodedUrl = encodeURI(variant.url);
 
+  // the frame takes the identity colour of the running demo, the stage waits in the colour of its sheet
+  const R = document.documentElement.style;
+  R.setProperty('--accent', demo.accent);
+  R.setProperty('--accent-on', demo.on);
+  R.setProperty('--accent-ink', demo.ink);
+  R.setProperty('--sheet', demo.id === '06' ? '#323841' : demo.sheet);
+  curMedium.textContent = `${demo.medium} · ${demo.house}`;
+
   // Update top buttons
   document.querySelectorAll('.demo-btn').forEach((b, i) => {
     b.classList.toggle('active', i === activeIdx);
+    if (i === activeIdx) { b.setAttribute('aria-current', 'true'); b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } else b.removeAttribute('aria-current');
   });
 
   // Update active title + variant pills
