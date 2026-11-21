@@ -1,0 +1,411 @@
+[
+ {
+  "id": "seeterrassen",
+  "name": "Seeterrassen",
+  "mark": "ST",
+  "district": "Hörde · Phoenix-See",
+  "lon": 7.51401,
+  "lat": 51.49252,
+  "form": "terraces",
+  "floors": 7,
+  "clear": 70,
+  "price": "ab 389.000 €",
+  "size": "58 bis 162 m²",
+  "units": "64 Wohnungen",
+  "ready": "3. Quartal 2027",
+  "mix": "2 bis 4 Zimmer, Penthouses",
+  "en": {
+   "district": "Hörde · Lake Phoenix",
+   "price": "from €389,000",
+   "size": "58 to 162 m²",
+   "units": "64 apartments",
+   "ready": "Q3 2027",
+   "mix": "2 to 4 rooms, penthouses"
+  },
+  "features": [
+   "Jede Wohnung mit Seeterrasse",
+   "Bootssteg am Nordufer",
+   "Tiefgarage mit Ladepunkten"
+  ],
+  "features_en": [
+   "A lake terrace for every flat",
+   "Jetty on the north shore",
+   "Underground parking with chargers"
+  ],
+  "fixed": true
+ },
+ {
+  "id": "speicher-sieben",
+  "name": "Speicher Sieben",
+  "mark": "S7",
+  "district": "Hafen · Speicherstraße",
+  "lon": 7.44449,
+  "lat": 51.5274,
+  "form": "loft",
+  "floors": 6,
+  "clear": 60,
+  "price": "ab 295.000 €",
+  "size": "44 bis 138 m²",
+  "units": "48 Lofts",
+  "ready": "1. Quartal 2027",
+  "mix": "Studios, Lofts, Maisonetten",
+  "en": {
+   "district": "Harbour · Speicherstraße",
+   "price": "from €295,000",
+   "size": "44 to 138 m²",
+   "units": "48 lofts",
+   "ready": "Q1 2027",
+   "mix": "Studios, lofts, maisonettes"
+  },
+  "features": [
+   "Umgebauter Getreidespeicher",
+   "3,80 m Raumhöhe",
+   "Dachterrasse über dem Hafenbecken"
+  ],
+  "features_en": [
+   "Converted grain store",
+   "3.80 m ceilings",
+   "Roof terrace above the dock"
+  ]
+ },
+ {
+  "id": "kreuzhof",
+  "name": "Kreuzhof",
+  "mark": "KH",
+  "district": "Kreuzviertel",
+  "lon": 7.44841,
+  "lat": 51.5046,
+  "form": "courtyard",
+  "floors": 5,
+  "clear": 55,
+  "price": "ab 349.000 €",
+  "size": "52 bis 124 m²",
+  "units": "36 Wohnungen",
+  "ready": "4. Quartal 2026",
+  "mix": "2 bis 4 Zimmer",
+  "en": {
+   "district": "Kreuzviertel",
+   "price": "from €349,000",
+   "size": "52 to 124 m²",
+   "units": "36 apartments",
+   "ready": "Q4 2026",
+   "mix": "2 to 4 rooms"
+  },
+  "features": [
+   "Grüner Innenhof",
+   "Ziegelfassade",
+   "Fünf Minuten zur Möllerbrücke"
+  ],
+  "features_en": [
+   "Green courtyard",
+   "Brick façade",
+   "Five minutes to Möllerbrücke"
+  ]
+ },
+ {
+  "id": "kaiser-karree",
+  "name": "Kaiser Karree",
+  "mark": "KK",
+  "district": "Kaiserstraßenviertel",
+  "lon": 7.48649,
+  "lat": 51.5144,
+  "form": "courtyard",
+  "floors": 6,
+  "clear": 60,
+  "price": "ab 319.000 €",
+  "size": "48 bis 131 m²",
+  "units": "54 Wohnungen",
+  "ready": "2. Quartal 2027",
+  "mix": "1 bis 4 Zimmer",
+  "en": {
+   "district": "Kaiserstraßenviertel",
+   "price": "from €319,000",
+   "size": "48 to 131 m²",
+   "units": "54 apartments",
+   "ready": "Q2 2027",
+   "mix": "1 to 4 rooms"
+  },
+  "features": [
+   "Läden im Erdgeschoss",
+   "Dachgarten für alle",
+   "Stadtbahn vor der Tür"
+  ],
+  "features_en": [
+   "Shops on the ground floor",
+   "Shared roof garden",
+   "Light rail at the door"
+  ]
+ },
+ {
+  "id": "union-lofts",
+  "name": "Union Lofts",
+  "mark": "UL",
+  "district": "Unionviertel",
+  "lon": 7.44693,
+  "lat": 51.51376,
+  "form": "tower",
+  "floors": 14,
+  "clear": 50,
+  "price": "ab 249.000 €",
+  "size": "32 bis 96 m²",
+  "units": "96 Wohnungen",
+  "ready": "3. Quartal 2027",
+  "mix": "Studios, 2 und 3 Zimmer",
+  "en": {
+   "district": "Unionviertel",
+   "price": "from €249,000",
+   "size": "32 to 96 m²",
+   "units": "96 apartments",
+   "ready": "Q3 2027",
+   "mix": "Studios, 2 and 3 rooms"
+  },
+  "features": [
+   "Blick auf das Dortmunder U",
+   "Co-Working im Sockel",
+   "Fahrradwerkstatt"
+  ],
+  "features_en": [
+   "View of the Dortmunder U",
+   "Co-working in the plinth",
+   "Bike workshop"
+  ]
+ },
+ {
+  "id": "kronenturm",
+  "name": "Kronenturm",
+  "mark": "KT",
+  "district": "Stadtkrone Ost",
+  "lon": 7.51009,
+  "lat": 51.50654,
+  "form": "tower",
+  "floors": 22,
+  "clear": 60,
+  "price": "ab 279.000 €",
+  "size": "38 bis 210 m²",
+  "units": "148 Wohnungen",
+  "ready": "2. Quartal 2028",
+  "mix": "Studios bis Penthouse",
+  "en": {
+   "district": "Stadtkrone Ost",
+   "price": "from €279,000",
+   "size": "38 to 210 m²",
+   "units": "148 apartments",
+   "ready": "Q2 2028",
+   "mix": "Studios to penthouse"
+  },
+  "features": [
+   "Skylounge im 21. Stock",
+   "Concierge",
+   "Weitblick bis ins Sauerland"
+  ],
+  "features_en": [
+   "Sky lounge on the 21st floor",
+   "Concierge",
+   "Views to the Sauerland hills"
+  ]
+ },
+ {
+  "id": "hochofen-hoefe",
+  "name": "Hochofen Höfe",
+  "mark": "HH",
+  "district": "Phoenix-West",
+  "lon": 7.47505,
+  "lat": 51.4893,
+  "form": "bars",
+  "floors": 8,
+  "clear": 75,
+  "price": "ab 269.000 €",
+  "size": "41 bis 118 m²",
+  "units": "112 Wohnungen",
+  "ready": "4. Quartal 2027",
+  "mix": "1 bis 4 Zimmer",
+  "en": {
+   "district": "Phoenix-West",
+   "price": "from €269,000",
+   "size": "41 to 118 m²",
+   "units": "112 apartments",
+   "ready": "Q4 2027",
+   "mix": "1 to 4 rooms"
+  },
+  "features": [
+   "Am alten Hochofen",
+   "Drei Höfe, autofrei",
+   "Kita im Haus"
+  ],
+  "features_en": [
+   "Next to the old blast furnace",
+   "Three car-free courtyards",
+   "Day care in the building"
+  ]
+ },
+ {
+  "id": "emscher-auen",
+  "name": "Emscher Auen",
+  "mark": "EA",
+  "district": "Aplerbeck",
+  "lon": 7.55289,
+  "lat": 51.49434,
+  "form": "townhouses",
+  "floors": 3,
+  "clear": 70,
+  "price": "ab 549.000 €",
+  "size": "128 bis 164 m²",
+  "units": "24 Stadthäuser",
+  "ready": "2. Quartal 2027",
+  "mix": "5 und 6 Zimmer mit Garten",
+  "en": {
+   "district": "Aplerbeck",
+   "price": "from €549,000",
+   "size": "128 to 164 m²",
+   "units": "24 town houses",
+   "ready": "Q2 2027",
+   "mix": "5 and 6 rooms with garden"
+  },
+  "features": [
+   "Eigener Garten",
+   "Wärmepumpe und Solardach",
+   "Am Emscherweg"
+  ],
+  "features_en": [
+   "Private garden",
+   "Heat pump and solar roof",
+   "On the Emscher path"
+  ]
+ },
+ {
+  "id": "buschei-park",
+  "name": "Buschei Park",
+  "mark": "BP",
+  "district": "Brackel · Hohenbuschei",
+  "lon": 7.55407,
+  "lat": 51.52888,
+  "form": "bars",
+  "floors": 4,
+  "clear": 70,
+  "price": "ab 299.000 €",
+  "size": "62 bis 128 m²",
+  "units": "58 Wohnungen",
+  "ready": "1. Quartal 2028",
+  "mix": "2 bis 5 Zimmer",
+  "en": {
+   "district": "Brackel · Hohenbuschei",
+   "price": "from €299,000",
+   "size": "62 to 128 m²",
+   "units": "58 apartments",
+   "ready": "Q1 2028",
+   "mix": "2 to 5 rooms"
+  },
+  "features": [
+   "Wohnen am Park",
+   "Holzhybridbau",
+   "Spielhof"
+  ],
+  "features_en": [
+   "Living by the park",
+   "Timber hybrid construction",
+   "Play yard"
+  ]
+ },
+ {
+  "id": "harkort-gaerten",
+  "name": "Harkort Gärten",
+  "mark": "HG",
+  "district": "Hombruch",
+  "lon": 7.44011,
+  "lat": 51.47958,
+  "form": "terraces",
+  "floors": 5,
+  "clear": 60,
+  "price": "ab 329.000 €",
+  "size": "55 bis 136 m²",
+  "units": "42 Wohnungen",
+  "ready": "3. Quartal 2027",
+  "mix": "2 bis 4 Zimmer",
+  "en": {
+   "district": "Hombruch",
+   "price": "from €329,000",
+   "size": "55 to 136 m²",
+   "units": "42 apartments",
+   "ready": "Q3 2027",
+   "mix": "2 to 4 rooms"
+  },
+  "features": [
+   "Gestaffelte Dachgärten",
+   "Ruhige Hanglage",
+   "Markt um die Ecke"
+  ],
+  "features_en": [
+   "Stepped roof gardens",
+   "Quiet hillside",
+   "Market round the corner"
+  ]
+ },
+ {
+  "id": "hansa-terrassen",
+  "name": "Hansa Terrassen",
+  "mark": "HT",
+  "district": "Huckarde",
+  "lon": 7.41331,
+  "lat": 51.53728,
+  "form": "slab",
+  "floors": 9,
+  "clear": 65,
+  "price": "ab 239.000 €",
+  "size": "36 bis 104 m²",
+  "units": "88 Wohnungen",
+  "ready": "4. Quartal 2027",
+  "mix": "Studios, 2 bis 4 Zimmer",
+  "en": {
+   "district": "Huckarde",
+   "price": "from €239,000",
+   "size": "36 to 104 m²",
+   "units": "88 apartments",
+   "ready": "Q4 2027",
+   "mix": "Studios, 2 to 4 rooms"
+  },
+  "features": [
+   "Blick auf die Kokerei Hansa",
+   "Laubengänge nach Süden",
+   "Gemeinschaftsküche"
+  ],
+  "features_en": [
+   "View of the Hansa coking plant",
+   "South-facing access galleries",
+   "Shared kitchen"
+  ]
+ },
+ {
+  "id": "floriansblick",
+  "name": "Floriansblick",
+  "mark": "FB",
+  "district": "Westfalenpark",
+  "lon": 7.48307,
+  "lat": 51.50156,
+  "form": "tower",
+  "floors": 17,
+  "clear": 55,
+  "price": "ab 359.000 €",
+  "size": "47 bis 188 m²",
+  "units": "102 Wohnungen",
+  "ready": "1. Quartal 2028",
+  "mix": "2 bis 5 Zimmer, Penthouses",
+  "en": {
+   "district": "Westfalenpark",
+   "price": "from €359,000",
+   "size": "47 to 188 m²",
+   "units": "102 apartments",
+   "ready": "Q1 2028",
+   "mix": "2 to 5 rooms, penthouses"
+  },
+  "features": [
+   "Der Florianturm vor dem Fenster",
+   "Wintergärten",
+   "Direkt am Park"
+  ],
+  "features_en": [
+   "The Florian tower outside your window",
+   "Winter gardens",
+   "Right at the park"
+  ]
+ }
+]

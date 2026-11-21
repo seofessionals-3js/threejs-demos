@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f2023">
+<title>Wohnungsfinder Dortmund · Projekt</title>
+<meta name="description" content="Ein Neubauprojekt des Wohnungsfinders Dortmund in seiner echten Nachbarschaft, als drehbares 3D-Modell mit Datenblatt.">
+<link rel="preload" href="fonts/Manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/map.css">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js">
+<link rel="preload" href="data/base.bin.gz" as="fetch" crossorigin>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
+</script>
+</head>
+<body data-page="objekt">
+<canvas id="gl" aria-label="3D-Modell des Projekts in seiner Nachbarschaft"></canvas>
+
+<header class="top">
+  <div class="brand">
+    <a class="wordmark" id="homeLink" href="./" aria-label="Wohnungsfinder Dortmund, zur Karte"><b>WOHNUNGSFINDER</b><span>DORTMUND</span></a>
+  </div>
+  <div class="tools">
+    <button class="chip dark" id="contactBtn" data-i18n="contact">Kontakt</button>
+    <button class="chip dark lang" id="langBtn" aria-label="Sprache wechseln">DE</button>
+  </div>
+</header>
+
+<aside class="sheet" id="sheet">
+  <button class="grab" id="sheetGrab" aria-expanded="true" aria-controls="sheetBody"><i></i><span class="sr" data-i18n="details">Datenblatt</span></button>
+  <div class="sheet-head"><span class="mark big" id="oMark"></span><div><h1 id="oName"></h1><p id="oDistrict"></p></div></div>
+  <div class="sheet-body" id="sheetBody">
+    <dl class="facts">
+      <div><dt data-i18n="price">Kaufpreis</dt><dd id="oPrice"></dd></div>
+      <div><dt data-i18n="size">Wohnfläche</dt><dd id="oSize"></dd></div>
+      <div><dt data-i18n="units">Einheiten</dt><dd id="oUnits"></dd></div>
+      <div><dt data-i18n="floors">Geschosse</dt><dd id="oFloors"></dd></div>
+      <div><dt data-i18n="ready">Fertigstellung</dt><dd id="oReady"></dd></div>
+    </dl>
+    <h2 data-i18n="mix">Wohnungsmix</h2><p id="oMix"></p>
+    <h2 data-i18n="features">Besonderheiten</h2><ul id="oFeatures"></ul>
+    <button class="cta" id="callBtn" data-i18n="call">Rückruf anfordern</button>
+    <p class="note" data-i18n="invented">Alle Projekte, Preise und Daten sind erfunden.</p>
+  </div>
+</aside>
+
+<nav class="dock" aria-label="Projekt">
+  <a class="pill" id="backLink" href="./">← <span data-i18n="back">Zurück zur Karte</span></a>
+  <a class="pill" id="mapsLink" href="#" target="_blank" rel="noopener" data-i18n="maps">Google Maps</a>
+  <button class="pill" id="spinBtn" aria-pressed="true" data-i18n="spin">Drehen</button>
+  <button class="pill strong" id="insideBtn" disabled><i class="cube"></i><span data-i18n="inside">Innen ansehen · folgt</span></button>
+</nav>
+
+<div id="contact" class="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <button class="x" id="contactClose" aria-label="Schließen">✕</button>
+    <h2 id="contactTitle" data-i18n="contactTitle">Rückruf anfordern</h2>
+    <p data-i18n="contactText">Das ist eine Demo: Hier stünde das Kontaktformular des Maklers. Es wird nichts gesendet.</p>
+    <button class="cta" id="contactOk" data-i18n="contactCta">Verstanden</button>
+  </div>
+</div>
+
+<div class="hint" id="hint"><i class="ico"></i><span data-i18n="hintObj">Ziehen zum Drehen</span></div>
+<footer class="credit"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap-Mitwirkende</a></footer>
+<div id="loader"><div class="ld"><b>WOHNUNGSFINDER</b><span>DORTMUND</span><div class="bar"><i id="ldBar"></i></div><em id="ldText">Lädt</em></div></div>
+<p class="sr" id="live" aria-live="polite"></p>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
