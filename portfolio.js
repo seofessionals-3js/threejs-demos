@@ -1,6 +1,7 @@
 // three.js Portfolio: one continuous show. When a demo (or one of its variants) has played to its end, the next
 // one loads and plays by itself, and after the last demo the show starts again with Demo 1.
-// The same file sits in every demo repo. Demo 1 runs its own three sheets and hands over to Demo 2 itself.
+// Demos 2 to 7 load this file from /threejs-demos/portfolio.js. Demo 1 runs its own three sheets and hands over to
+// Demo 2 itself.
 //
 //   ?autoplay=1   arrived from the demo before: show its card, then play this page by itself
 //   any wheel, touch, click or key takes over; the pill at the bottom hands it back
@@ -40,29 +41,48 @@
   const AUTO = Q.has('autoplay');
   const pad = n => String(n).padStart(2, '0');
 
-  // ---- the hand-over card and the pill, in the house style of the demos (dark paper, cyan accent)
+  // ---- the hand-over card and the pill. Every demo is drawn in its own plan medium, and the card that announces a
+  // demo is a cover sheet in that medium: its sheet, its line colour and its one accent. So the card that closes
+  // one demo already has the colours of the page that loads behind it.
+  //   sheet / ink: the cover sheet and its lettering, chip / on: the number, pill: the small control over the scene
+  const MEDIA = {
+    1: { medium: 'Blaupause', sheet: '#1e4a8c', ink: '#f3f6fb', chip: '#f4b63f', on: '#163a72', pill: '#163a72', pillInk: '#f3f6fb', dot: '#f4b63f' },
+    2: { medium: 'Tusche auf Transparentpapier', sheet: '#e9e7e0', ink: '#1b1c1e', chip: '#e07a12', on: '#1b1c1e', pill: '#1b1c1e', pillInk: '#f4f3ee', dot: '#f39a36' },
+    3: { medium: 'Aquarell auf Bütten', sheet: '#f3ebdb', ink: '#3b2f27', chip: '#1b7a8c', on: '#f9f3e7', pill: '#3b2f27', pillInk: '#f9f3e7', dot: '#3aa3b0' },
+    4: { medium: 'Bauzeichnung nach Norm', sheet: '#f5f4ef', ink: '#17191c', chip: '#d43a2a', on: '#fbfaf7', pill: '#17191c', pillInk: '#f5f4ef', dot: '#ee5a48' },
+    5: { medium: 'Lichtpause mit Textmarker', sheet: '#eeedea', ink: '#3d3492', chip: '#ffd23c', on: '#231d5e', pill: '#231d5e', pillInk: '#eeedea', dot: '#ffd23c' },
+    6: { medium: 'Kartonmodell auf der Schneidematte', sheet: '#323841', ink: '#f5f2ea', chip: '#f2a531', on: '#262b31', pill: '#262b31', pillInk: '#f5f2ea', dot: '#f2a531' },
+    7: { medium: 'Trois crayons auf Tonpapier', sheet: '#dfd2ba', ink: '#2a2522', chip: '#a5432b', on: '#fcf9f2', pill: '#2a2522', pillInk: '#eadfcb', dot: '#c65e42' },
+  };
+  const HERE = MEDIA[ST.demo];
+  // the fonts are the ones of the page the card lies on: every demo names its own display and label face
+  const DISPLAY = "var(--display, var(--font-display, 'Chakra Petch', 'Arial Narrow', sans-serif))";
+  const LABEL = "var(--label, var(--mono, var(--font-mono, 'IBM Plex Mono', ui-monospace, monospace)))";
   const css = document.createElement('style');
   css.textContent = `
   #pf-card { position: fixed; inset: 0; z-index: 2147483000; pointer-events: none; opacity: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    background: #050506; color: #f1eeea; text-transform: uppercase; transition: none; }
-  #pf-card .k { font: 500 10px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .24em; color: #96938f; }
-  #pf-card .n { font: 600 15px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .3em; color: #43c4d2; padding: 3px 10px; border: 1px solid #43c4d2; }
-  #pf-card .t { font: 600 clamp(36px, 5vw, 64px)/1 'Chakra Petch', sans-serif; letter-spacing: .02em; text-align: center; padding: 0 16px; }
-  #pf-card .s { font: 500 11px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .2em; color: #96938f; }
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    background: var(--pf-sheet); color: var(--pf-ink); text-transform: uppercase; transition: none; }
+  #pf-card::before { content: ''; position: absolute; inset: 14px; border: 1px solid var(--pf-ink); opacity: .28; }
+  #pf-card .k { font: 500 10px ${LABEL}; letter-spacing: .24em; opacity: .66; }
+  #pf-card .n { font: 700 15px ${LABEL}; letter-spacing: .3em; text-indent: .3em; color: var(--pf-on); background: var(--pf-chip); padding: 5px 11px 4px; }
+  #pf-card .t { font: 600 clamp(34px, 5vw, 64px)/1 ${DISPLAY}; letter-spacing: .02em; text-align: center; padding: 0 22px; }
+  #pf-card .s { font: 600 11px ${LABEL}; letter-spacing: .2em; text-align: center; padding: 0 22px; }
+  #pf-card .m { font: 500 10px ${LABEL}; letter-spacing: .2em; opacity: .66; text-align: center; padding: 8px 22px 0; }
+  #pf-card .m::before { content: ''; display: block; width: 44px; height: 1px; margin: 0 auto 12px; background: var(--pf-ink); }
   #pf-pill { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 2147482000;
-    display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 10px; border: 1px solid rgba(67,196,210,.55);
-    background: rgba(8,8,10,.86); color: #f1eeea; font: 600 10px 'IBM Plex Mono', ui-monospace, monospace;
-    letter-spacing: .16em; text-transform: uppercase; cursor: pointer; opacity: 0; transition: opacity .4s;
-    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); white-space: nowrap; }
-  #pf-pill.on { opacity: 1; }
-  #pf-pill i { width: 7px; height: 7px; border-radius: 50%; background: #43c4d2; flex: none; }
-  #pf-pill.paused i { background: transparent; border: 1px solid #43c4d2; width: 5px; height: 5px; }
-  #pf-pill b { position: absolute; left: 0; bottom: -1px; height: 2px; background: #43c4d2; width: 0; }
-  @media (max-width: 700px) { #pf-pill { bottom: 8px; font-size: 9px; letter-spacing: .1em; } }`;
+    display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 10px; border: 1px solid ${HERE.pillInk}33;
+    background: ${HERE.pill}; color: ${HERE.pillInk}; font: 600 10px ${LABEL};
+    letter-spacing: .16em; text-transform: uppercase; cursor: pointer; opacity: 0; visibility: hidden;
+    transition: opacity .4s, visibility 0s .4s; white-space: nowrap; -webkit-tap-highlight-color: transparent; }
+  #pf-pill.on { opacity: .96; visibility: visible; transition: opacity .4s; }
+  #pf-pill i { width: 7px; height: 7px; border-radius: 50%; background: ${HERE.dot}; flex: none; }
+  #pf-pill.paused i { background: transparent; border: 1px solid ${HERE.dot}; width: 5px; height: 5px; }
+  #pf-pill b { position: absolute; left: 0; bottom: -1px; height: 2px; background: ${HERE.dot}; width: 100%; transform: scaleX(0); transform-origin: 0 50%; }
+  @media (max-width: 700px) { #pf-pill { bottom: 8px; font-size: 9px; letter-spacing: .1em; } #pf-card::before { inset: 9px; } }`;
   document.head.appendChild(css);
   const card = document.createElement('div'); card.id = 'pf-card'; card.setAttribute('aria-hidden', 'true');
-  card.innerHTML = '<span class="k"></span><span class="n"></span><span class="t"></span><span class="s"></span>';
+  card.innerHTML = '<span class="k"></span><span class="n"></span><span class="t"></span><span class="s"></span><span class="m"></span>';
   const pill = document.createElement('button'); pill.id = 'pf-pill'; pill.type = 'button';
   const ST_PILL = () => ST.pillTop;
   pill.innerHTML = '<i></i><span></span><b></b>';
@@ -71,15 +91,25 @@
     card.querySelector('.n').textContent = pad(s.demo);
     card.querySelector('.t').textContent = 'three.js Demo ' + s.demo;
     card.querySelector('.s').textContent = s.name;
+    const M = MEDIA[s.demo];
+    card.querySelector('.m').textContent = M.medium;
+    card.style.setProperty('--pf-sheet', M.sheet); card.style.setProperty('--pf-ink', M.ink);
+    card.style.setProperty('--pf-chip', M.chip); card.style.setProperty('--pf-on', M.on);
   };
   if (ST_PILL()) Object.assign(pill.style, { top: ST_PILL() + 'px', bottom: 'auto' });   // Demo 5 keeps its plan at the bottom, the pill goes under its toolbar
   const mount = () => { document.body.appendChild(card); document.body.appendChild(pill); };
   if (document.body) mount(); else addEventListener('DOMContentLoaded', mount);
 
   // ---- state
-  let playing = AUTO, u = null, endT = -1, goT = -1, gone = false, t0 = performance.now(), last = t0, built = false;
+  let playing = AUTO, u = null, endT = -1, goT = -1, gone = false, t0 = performance.now(), last = t0, built = false, bar = null;
   const say = (txt, paused) => { const sp = pill.querySelector('span'); if (sp.textContent !== txt) sp.textContent = txt; pill.classList.toggle('paused', !!paused); };
-  const maxY = () => Math.max(0, (document.scrollingElement || document.documentElement).scrollHeight - innerHeight);
+  // the scroll range is measured twice a second and on resize, not every frame: reading scrollHeight forces layout
+  let maxYv = 0, maxYt = -1e9;
+  const measure = () => { maxYv = Math.max(0, (document.scrollingElement || document.documentElement).scrollHeight - innerHeight); maxYt = performance.now(); return maxYv; };
+  const maxY = () => (performance.now() - maxYt > 500 ? measure() : maxYv);
+  addEventListener('resize', () => { maxYt = -1e9; }, { passive: true });
+  // style writes only when the value changes
+  const put = (el, prop, v) => { if (el.__pf !== undefined && el.__pf[prop] === v) return; (el.__pf || (el.__pf = {}))[prop] = v; el.style[prop] = v; };
   const st5 = () => window.__state;
   const atEnd = () => ST.weeks ? !!st5() && st5().WK >= ST.weeks - 0.002 : maxY() > 50 && scrollY >= maxY() - 3;
   const setPlaying = v => {
@@ -103,13 +133,13 @@
   addEventListener('keydown', e => { if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) takeOver(e); }, { capture: true });
   pill.addEventListener('click', e => { e.stopPropagation(); if (goT < 0) setPlaying(!playing); });
 
-  if (AUTO) { setCard(ST, 'three.js Portfolio'); card.style.opacity = '1'; }
+  if (AUTO) { setCard(ST, 'three.js Portfolio'); put(card, 'opacity', '1'); }
 
   function tick(now) {
     const dt = Math.min(0.25, Math.max(0, (now - last) / 1000)); last = now;   // wall clock, so a slow machine keeps the pace
     const T = (now - t0) / 1000;
     // arriving: this demo's own card lifts off the page
-    if (AUTO && goT < 0) card.style.opacity = String(1 - Math.min(1, Math.max(0, (T - 0.35) / 0.7)));
+    if (AUTO && goT < 0) put(card, 'opacity', (1 - Math.min(1, Math.max(0, (T - 0.35) / 0.7))).toFixed(3));
     const started = T > (ST.start ?? 4);
     // play: an even glide down the page, easing in over the first two seconds
     if (playing && started && endT < 0) {
@@ -130,7 +160,7 @@
     }
     if (goT >= 0) {
       goT += dt;
-      card.style.opacity = String(Math.min(1, goT / 0.55));
+      put(card, 'opacity', Math.min(1, goT / 0.55).toFixed(3));
       if (goT > 0.75 && !gone) { gone = true; location.href = nextUrl; }
     }
     // the pill: what is happening and what comes next
@@ -139,8 +169,8 @@
     if (endT >= 0) say(`Weiter: Demo ${NX.demo} · ${NX.name}`);
     else if (playing) say('Portfolio läuft · Scrollen übernimmt');
     else say('▶ Portfolio abspielen', true);
-    const bar = pill.querySelector('b');
-    bar.style.width = endT >= 0 ? `${Math.min(100, endT / (playing ? 1.0 : 2.2) * 100)}%` : '0';
+    if (!bar) bar = pill.querySelector('b');
+    put(bar, 'transform', endT >= 0 ? `scaleX(${Math.min(1, endT / (playing ? 1.0 : 2.2)).toFixed(3)})` : 'scaleX(0)');
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
