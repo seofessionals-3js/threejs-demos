@@ -1,7 +1,7 @@
 // three.js Portfolio: one continuous show. When a demo (or one of its variants) has played to its end, the next
 // one loads and plays by itself, and after the last demo the show starts again with Demo 1.
-// Demos 2 to 7 load this file from /threejs-demos/portfolio.js. Demo 1 runs its own three sheets and hands over to
-// Demo 2 itself.
+// Every demo except the Blaupause loads this file from /threejs-demos/portfolio.js. The Blaupause (repo
+// threejs-demo-1, Nummer 7 in the show) runs its own three sheets and hands over to Nummer 1 (Wohnungsfinder) itself.
 //
 //   ?autoplay=1   arrived from the demo before: show its card, then play this page by itself
 //   any wheel, touch, click or key takes over; the pill at the bottom hands it back
@@ -13,8 +13,11 @@
   // Demo 4 and Demo 5 (both Projekt Steininger) share the same Abspielen button.
   const D4 = { btn: '#playBtn', on: b => b.getAttribute('aria-pressed') === 'true' };
   const D5 = { ...D4, weeks: 38, pillTop: 140 };
+  // n: the number in the show and on the overview; repo paths stay as they are (threejs-demo-7 is now Nummer 1)
   const SHOW = [
-    { demo: 1, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
+    { demo: 1, title: 'Wohnungsfinder', path: '/threejs-demo-7/a-one-door/', name: 'Eine Tür', dur: 34, start: 4 },
+    { demo: 1, title: 'Wohnungsfinder', path: '/threejs-demo-7/b-the-row/', name: 'Die Reihe', dur: 30, start: 4 },
+    { demo: 1, title: 'Wohnungsfinder', path: '/threejs-demo-7/c-the-face/', name: 'Die Fassade', dur: 26, start: 4 },
     { demo: 2, path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 88, start: 4 },
     { demo: 3, path: '/threejs-demo-3/', q: 'dir=a', name: 'Objektiv öffnen', dur: 48, start: 5 },
     { demo: 3, path: '/threejs-demo-3/', q: 'dir=c', name: 'Die Treppe hinab', dur: 40, start: 5 },
@@ -23,9 +26,7 @@
     { demo: 5, path: '/threejs-demo-5/', q: 'dir=b&wk=0', name: 'Plan im Maßstab 1:1', start: 3, ...D5 },
     { demo: 5, path: '/threejs-demo-5/', q: 'dir=c&wk=0', name: 'Baustellenkamera', start: 3, ...D5 },
     { demo: 6, path: '/threejs-demo-6/', name: 'Es beginnt auf dem Tisch', dur: 62, start: 4 },
-    { demo: 7, path: '/threejs-demo-7/a-one-door/', name: 'Eine Tür', dur: 34, start: 4 },
-    { demo: 7, path: '/threejs-demo-7/b-the-row/', name: 'Die Reihe', dur: 30, start: 4 },
-    { demo: 7, path: '/threejs-demo-7/c-the-face/', name: 'Die Fassade', dur: 26, start: 4 },
+    { demo: 7, own: true, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
   ];
   const Q = new URLSearchParams(location.search);
   if (Q.has('rec') || Q.has('drive') || Q.has('shot') || Q.has('noshow')) return;     // recordings and stills stay still
@@ -37,7 +38,8 @@
   const dir = Q.get('dir');
   const [ST, SI] = cands.find(([s]) => s.q && dir && s.q.includes('dir=' + dir)) || cands[0];
   const NX = SHOW[(SI + 1) % SHOW.length];
-  const nextUrl = NX.path + '?' + (NX.q ? NX.q + (NX.demo === 1 ? '' : '&') : '') + (NX.demo === 1 ? '' : 'autoplay=1');
+  // the Blaupause (threejs-demo-1) runs its own three sheets and hands over to Nummer 1 by itself
+  const nextUrl = NX.path + '?' + (NX.q ? NX.q + (NX.own ? '' : '&') : '') + (NX.own ? '' : 'autoplay=1');
   const AUTO = Q.has('autoplay');
   const pad = n => String(n).padStart(2, '0');
 
@@ -46,13 +48,13 @@
   // one demo already has the colours of the page that loads behind it.
   //   sheet / ink: the cover sheet and its lettering, chip / on: the number, pill: the small control over the scene
   const MEDIA = {
-    1: { medium: 'Blaupause', sheet: '#1e4a8c', ink: '#f3f6fb', chip: '#f4b63f', on: '#163a72', pill: '#163a72', pillInk: '#f3f6fb', dot: '#f4b63f' },
+    1: { medium: 'Trois crayons auf Tonpapier', sheet: '#dfd2ba', ink: '#2a2522', chip: '#a5432b', on: '#fcf9f2', pill: '#2a2522', pillInk: '#eadfcb', dot: '#c65e42' },
     2: { medium: 'Tusche auf Transparentpapier', sheet: '#e9e7e0', ink: '#1b1c1e', chip: '#e07a12', on: '#1b1c1e', pill: '#1b1c1e', pillInk: '#f4f3ee', dot: '#f39a36' },
     3: { medium: 'Aquarell auf Bütten', sheet: '#f3ebdb', ink: '#3b2f27', chip: '#1b7a8c', on: '#f9f3e7', pill: '#3b2f27', pillInk: '#f9f3e7', dot: '#3aa3b0' },
     4: { medium: 'Bauzeichnung nach Norm', sheet: '#f5f4ef', ink: '#17191c', chip: '#d43a2a', on: '#fbfaf7', pill: '#17191c', pillInk: '#f5f4ef', dot: '#ee5a48' },
     5: { medium: 'Lichtpause mit Textmarker', sheet: '#eeedea', ink: '#3d3492', chip: '#ffd23c', on: '#231d5e', pill: '#231d5e', pillInk: '#eeedea', dot: '#ffd23c' },
     6: { medium: 'Kartonmodell auf der Schneidematte', sheet: '#323841', ink: '#f5f2ea', chip: '#f2a531', on: '#262b31', pill: '#262b31', pillInk: '#f5f2ea', dot: '#f2a531' },
-    7: { medium: 'Trois crayons auf Tonpapier', sheet: '#dfd2ba', ink: '#2a2522', chip: '#a5432b', on: '#fcf9f2', pill: '#2a2522', pillInk: '#eadfcb', dot: '#c65e42' },
+    7: { medium: 'Blaupause', sheet: '#1e4a8c', ink: '#f3f6fb', chip: '#f4b63f', on: '#163a72', pill: '#163a72', pillInk: '#f3f6fb', dot: '#f4b63f' },
   };
   const HERE = MEDIA[ST.demo];
   // the fonts are the ones of the page the card lies on: every demo names its own display and label face
@@ -89,7 +91,7 @@
   const setCard = (s, k) => {
     card.querySelector('.k').textContent = k;
     card.querySelector('.n').textContent = pad(s.demo);
-    card.querySelector('.t').textContent = 'three.js Demo ' + s.demo;
+    card.querySelector('.t').textContent = s.title || 'three.js Demo ' + s.demo;
     card.querySelector('.s').textContent = s.name;
     const M = MEDIA[s.demo];
     card.querySelector('.m').textContent = M.medium;
@@ -166,7 +168,7 @@
     // the pill: what is happening and what comes next
     const showPill = AUTO || endT >= 0 || !playing && u != null;
     pill.classList.toggle('on', showPill && goT < 0 && T > 1.2);
-    if (endT >= 0) say(`Weiter: Demo ${NX.demo} · ${NX.name}`);
+    if (endT >= 0) say(`Weiter: ${NX.title || 'Demo ' + NX.demo} · ${NX.name}`);
     else if (playing) say('Portfolio läuft · Scrollen übernimmt');
     else say('▶ Portfolio abspielen', true);
     if (!bar) bar = pill.querySelector('b');
