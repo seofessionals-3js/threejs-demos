@@ -1,411 +1,775 @@
 [
  {
-  "id": "seeterrassen",
-  "name": "Seeterrassen",
-  "mark": "ST",
-  "district": "Hörde · Phoenix-See",
-  "lon": 7.51401,
-  "lat": 51.49252,
-  "form": "terraces",
-  "floors": 7,
-  "clear": 70,
-  "price": "ab 389.000 €",
-  "size": "58 bis 162 m²",
-  "units": "64 Wohnungen",
-  "ready": "3. Quartal 2027",
-  "mix": "2 bis 4 Zimmer, Penthouses",
-  "en": {
-   "district": "Hörde · Lake Phoenix",
-   "price": "from €389,000",
-   "size": "58 to 162 m²",
-   "units": "64 apartments",
-   "ready": "Q3 2027",
-   "mix": "2 to 4 rooms, penthouses"
-  },
-  "features": [
-   "Jede Wohnung mit Seeterrasse",
-   "Bootssteg am Nordufer",
-   "Tiefgarage mit Ladepunkten"
-  ],
-  "features_en": [
-   "A lake terrace for every flat",
-   "Jetty on the north shore",
-   "Underground parking with chargers"
-  ],
-  "fixed": true
- },
- {
-  "id": "speicher-sieben",
-  "name": "Speicher Sieben",
-  "mark": "S7",
-  "district": "Hafen · Speicherstraße",
-  "lon": 7.44449,
-  "lat": 51.5274,
-  "form": "loft",
-  "floors": 6,
-  "clear": 60,
-  "price": "ab 295.000 €",
-  "size": "44 bis 138 m²",
-  "units": "48 Lofts",
-  "ready": "1. Quartal 2027",
-  "mix": "Studios, Lofts, Maisonetten",
-  "en": {
-   "district": "Harbour · Speicherstraße",
-   "price": "from €295,000",
-   "size": "44 to 138 m²",
-   "units": "48 lofts",
-   "ready": "Q1 2027",
-   "mix": "Studios, lofts, maisonettes"
-  },
-  "features": [
-   "Umgebauter Getreidespeicher",
-   "3,80 m Raumhöhe",
-   "Dachterrasse über dem Hafenbecken"
-  ],
-  "features_en": [
-   "Converted grain store",
-   "3.80 m ceilings",
-   "Roof terrace above the dock"
-  ]
- },
- {
-  "id": "kreuzhof",
-  "name": "Kreuzhof",
+  "id": "kreuzhoefe",
+  "name": "Kreuzhöfe",
   "mark": "KH",
   "district": "Kreuzviertel",
-  "lon": 7.44841,
+  "lon": 7.4487,
   "lat": 51.5046,
-  "form": "courtyard",
-  "floors": 5,
-  "clear": 55,
-  "price": "ab 349.000 €",
-  "size": "52 bis 124 m²",
-  "units": "36 Wohnungen",
-  "ready": "4. Quartal 2026",
-  "mix": "2 bis 4 Zimmer",
+  "clear": 29,
+  "type": "Stadthäuser",
   "en": {
    "district": "Kreuzviertel",
-   "price": "from €349,000",
-   "size": "52 to 124 m²",
-   "units": "36 apartments",
+   "type": "Town houses",
    "ready": "Q4 2026",
-   "mix": "2 to 4 rooms"
+   "arch": "Town houses on the scale of the old quarter: white and grey brick, a zinc bay or a stone frame turn and turn about, standing-seam zinc roofs, oxide-red glass doors.",
+   "price": "from €625,000",
+   "size": "138 to 152 m²",
+   "units": "5 town houses",
+   "mix": "4 to 5 rooms with garden"
   },
+  "arch": "Stadthäuser im Maß des Gründerzeitviertels: weißer und grauer Ziegel, im Wechsel ein Zinkerker oder ein Steinrahmen, Stehfalzdächer aus Zink, Glastüren in Oxidrot.",
+  "ready": "4. Quartal 2026",
   "features": [
-   "Grüner Innenhof",
-   "Ziegelfassade",
+   "Zinkerker und Steinrahmen im Wechsel",
+   "Halle über zwei Geschosse",
    "Fünf Minuten zur Möllerbrücke"
   ],
   "features_en": [
-   "Green courtyard",
-   "Brick façade",
+   "Zinc bays and stone frames in turn",
+   "Hall over two storeys",
    "Five minutes to Möllerbrücke"
-  ]
- },
- {
-  "id": "kaiser-karree",
-  "name": "Kaiser Karree",
-  "mark": "KK",
-  "district": "Kaiserstraßenviertel",
-  "lon": 7.48649,
-  "lat": 51.5144,
-  "form": "courtyard",
-  "floors": 6,
-  "clear": 60,
-  "price": "ab 319.000 €",
-  "size": "48 bis 131 m²",
-  "units": "54 Wohnungen",
-  "ready": "2. Quartal 2027",
-  "mix": "1 bis 4 Zimmer",
-  "en": {
-   "district": "Kaiserstraßenviertel",
-   "price": "from €319,000",
-   "size": "48 to 131 m²",
-   "units": "54 apartments",
-   "ready": "Q2 2027",
-   "mix": "1 to 4 rooms"
-  },
-  "features": [
-   "Läden im Erdgeschoss",
-   "Dachgarten für alle",
-   "Stadtbahn vor der Tür"
   ],
-  "features_en": [
-   "Shops on the ground floor",
-   "Shared roof garden",
-   "Light rail at the door"
-  ]
+  "style": {
+   "roofName": "Satteldach, Zink",
+   "wallName": "Ziegel, weiß und grau",
+   "variants": [
+    {
+     "par": 7.0,
+     "first": "frame",
+     "brick": "0xe0dbcf"
+    },
+    {
+     "par": 6.7,
+     "first": "bay",
+     "setback": -0.3
+    }
+   ]
+  },
+  "rows": [
+   {
+    "name": "Zeile",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 138
+     },
+     {
+      "no": "02",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 146,
+      "price": "625.000 €"
+     },
+     {
+      "no": "03",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 152
+     },
+     {
+      "no": "04",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 138
+     },
+     {
+      "no": "05",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 146,
+      "price": "643.000 €"
+     }
+    ]
+   }
+  ],
+  "units": "5 Stadthäuser",
+  "free": 2,
+  "total": 5,
+  "size": "138 bis 152 m²",
+  "price": "ab 625.000 €",
+  "mix": "4 bis 5 Zimmer mit Garten",
+  "rot": -172.8
  },
  {
-  "id": "union-lofts",
-  "name": "Union Lofts",
-  "mark": "UL",
-  "district": "Unionviertel",
-  "lon": 7.44693,
-  "lat": 51.51376,
-  "form": "tower",
-  "floors": 14,
-  "clear": 50,
-  "price": "ab 249.000 €",
-  "size": "32 bis 96 m²",
-  "units": "96 Wohnungen",
-  "ready": "3. Quartal 2027",
-  "mix": "Studios, 2 und 3 Zimmer",
+  "id": "seehoefe",
+  "name": "Seehöfe",
+  "mark": "SH",
+  "district": "Hörde · Phoenix-See",
+  "lon": 7.51401,
+  "lat": 51.49252,
+  "clear": 31,
+  "fixed": true,
+  "type": "Stadthäuser mit Dachterrasse",
   "en": {
-   "district": "Unionviertel",
-   "price": "from €249,000",
-   "size": "32 to 96 m²",
-   "units": "96 apartments",
+   "district": "Hörde · Lake Phoenix",
+   "type": "Town houses with roof terrace",
    "ready": "Q3 2027",
-   "mix": "Studios, 2 and 3 rooms"
+   "arch": "White cubes by the lake: smooth render, flat roofs with a terrace and a steel guard, large framed windows, a balcony on every second house, doors in anthracite.",
+   "price": "from €709,000",
+   "size": "142 to 156 m²",
+   "units": "6 town houses with roof terrace",
+   "mix": "4 to 5 rooms with garden"
   },
+  "arch": "Weiße Kuben am See: glatter Putz, Flachdach mit Dachterrasse und Stahlgeländer, große gerahmte Fenster, an jedem zweiten Haus ein Balkon, Türen in Anthrazit.",
+  "ready": "3. Quartal 2027",
   "features": [
-   "Blick auf das Dortmunder U",
-   "Co-Working im Sockel",
-   "Fahrradwerkstatt"
+   "Dachterrasse mit Seeblick",
+   "Flachdach, weißer Putz",
+   "Zwei Minuten zum Nordufer"
   ],
   "features_en": [
-   "View of the Dortmunder U",
-   "Co-working in the plinth",
-   "Bike workshop"
-  ]
+   "Roof terrace with lake view",
+   "Flat roof, white render",
+   "Two minutes to the north shore"
+  ],
+  "style": {
+   "roofName": "Flachdach mit Terrasse",
+   "wallName": "Putz, weiß",
+   "base": {
+    "wall": "plaster",
+    "brick": "0xf5f2ec",
+    "roof": "none",
+    "terrace": true,
+    "doorColor": "0x3a3d40"
+   },
+   "variants": [
+    {
+     "par": 7.1,
+     "first": "frame"
+    },
+    {
+     "par": 6.8,
+     "first": "balcony",
+     "setback": -0.6
+    }
+   ]
+  },
+  "rows": [
+   {
+    "name": "Zeile",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 148
+     },
+     {
+      "no": "02",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 142
+     },
+     {
+      "no": "03",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 156,
+      "price": "728.000 €"
+     },
+     {
+      "no": "04",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 148
+     },
+     {
+      "no": "05",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 142,
+      "price": "709.000 €"
+     },
+     {
+      "no": "06",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 156
+     }
+    ]
+   }
+  ],
+  "units": "6 Stadthäuser mit Dachterrasse",
+  "free": 2,
+  "total": 6,
+  "size": "142 bis 156 m²",
+  "price": "ab 709.000 €",
+  "mix": "4 bis 5 Zimmer mit Garten",
+  "rot": 0.6
  },
  {
-  "id": "kronenturm",
-  "name": "Kronenturm",
-  "mark": "KT",
-  "district": "Stadtkrone Ost",
-  "lon": 7.51009,
-  "lat": 51.50654,
-  "form": "tower",
-  "floors": 22,
-  "clear": 60,
-  "price": "ab 279.000 €",
-  "size": "38 bis 210 m²",
-  "units": "148 Wohnungen",
-  "ready": "2. Quartal 2028",
-  "mix": "Studios bis Penthouse",
+  "id": "speicherzeile",
+  "name": "Speicherzeile",
+  "mark": "SZ",
+  "district": "Hafen · Speicherstraße",
+  "lon": 7.44449,
+  "lat": 51.5274,
+  "clear": 31,
+  "type": "Giebelhäuser",
   "en": {
-   "district": "Stadtkrone Ost",
-   "price": "from €279,000",
-   "size": "38 to 210 m²",
-   "units": "148 apartments",
-   "ready": "Q2 2028",
-   "mix": "Studios to penthouse"
+   "district": "Harbour · Speicherstraße",
+   "type": "Gabled houses",
+   "ready": "Q1 2027",
+   "arch": "Like the old warehouses of the harbour: dark red clinker with a diamond pattern of headers, every house with its gable to the street, dark roofs, doors of black steel.",
+   "price": "from €479,000",
+   "size": "126 to 134 m²",
+   "units": "6 gabled houses",
+   "mix": "4 to 5 rooms with garden"
   },
+  "arch": "Wie die alten Speicher am Hafen: dunkelroter Klinker mit Rautenmuster aus Bindern, jedes Haus mit dem Giebel zur Straße, dunkle Dächer, Türen aus schwarzem Stahl.",
+  "ready": "1. Quartal 2027",
   "features": [
-   "Skylounge im 21. Stock",
-   "Concierge",
-   "Weitblick bis ins Sauerland"
+   "Giebel zur Straße wie am Speicher",
+   "Klinker mit Rautenmuster",
+   "Am Hafenbecken"
   ],
   "features_en": [
-   "Sky lounge on the 21st floor",
-   "Concierge",
-   "Views to the Sauerland hills"
-  ]
- },
- {
-  "id": "hochofen-hoefe",
-  "name": "Hochofen Höfe",
-  "mark": "HH",
-  "district": "Phoenix-West",
-  "lon": 7.47505,
-  "lat": 51.4893,
-  "form": "bars",
-  "floors": 8,
-  "clear": 75,
-  "price": "ab 269.000 €",
-  "size": "41 bis 118 m²",
-  "units": "112 Wohnungen",
-  "ready": "4. Quartal 2027",
-  "mix": "1 bis 4 Zimmer",
-  "en": {
-   "district": "Phoenix-West",
-   "price": "from €269,000",
-   "size": "41 to 118 m²",
-   "units": "112 apartments",
-   "ready": "Q4 2027",
-   "mix": "1 to 4 rooms"
-  },
-  "features": [
-   "Am alten Hochofen",
-   "Drei Höfe, autofrei",
-   "Kita im Haus"
+   "Gables to the street like a warehouse",
+   "Clinker with a diamond pattern",
+   "On the dock"
   ],
-  "features_en": [
-   "Next to the old blast furnace",
-   "Three car-free courtyards",
-   "Day care in the building"
-  ]
+  "style": {
+   "roofName": "Giebel zur Straße",
+   "wallName": "Klinker, dunkelrot",
+   "base": {
+    "brick": "0x8f4d3b",
+    "roof": "front",
+    "roofColor": "0x3f4448",
+    "doorColor": "0x26282a",
+    "chimney": false,
+    "relief": 0.014,
+    "header": "0x4f2a22"
+   },
+   "variants": [
+    {
+     "par": 6.9,
+     "first": "plain"
+    },
+    {
+     "par": 6.9,
+     "first": "bay"
+    }
+   ]
+  },
+  "rows": [
+   {
+    "name": "Zeile",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 126,
+      "price": "479.000 €"
+     },
+     {
+      "no": "02",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "03",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 126
+     },
+     {
+      "no": "04",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 134,
+      "price": "515.000 €"
+     },
+     {
+      "no": "05",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 126
+     },
+     {
+      "no": "06",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     }
+    ]
+   }
+  ],
+  "units": "6 Giebelhäuser",
+  "free": 2,
+  "total": 6,
+  "size": "126 bis 134 m²",
+  "price": "ab 479.000 €",
+  "mix": "4 bis 5 Zimmer mit Garten",
+  "rot": -172.6
  },
  {
-  "id": "emscher-auen",
-  "name": "Emscher Auen",
-  "mark": "EA",
+  "id": "emscher-gaerten",
+  "name": "Emscher Gärten",
+  "mark": "EG",
   "district": "Aplerbeck",
-  "lon": 7.55289,
-  "lat": 51.49434,
-  "form": "townhouses",
-  "floors": 3,
-  "clear": 70,
-  "price": "ab 549.000 €",
-  "size": "128 bis 164 m²",
-  "units": "24 Stadthäuser",
-  "ready": "2. Quartal 2027",
-  "mix": "5 und 6 Zimmer mit Garten",
+  "lon": 7.55231,
+  "lat": 51.49253,
+  "clear": 68,
+  "type": "Doppelhaushälften",
   "en": {
    "district": "Aplerbeck",
-   "price": "from €549,000",
-   "size": "128 to 164 m²",
-   "units": "24 town houses",
+   "type": "Semi-detached houses",
    "ready": "Q2 2027",
-   "mix": "5 and 6 rooms with garden"
+   "arch": "Twenty-four semi-detached houses in four rows: cream render, red clay roofs, a dormer on every second half, a garage between the pairs, green front doors.",
+   "price": "from €555,000",
+   "size": "128 to 134 m²",
+   "units": "24 semi-detached houses",
+   "mix": "5 rooms with garden"
   },
+  "arch": "24 Doppelhaushälften in vier Zeilen: cremeweißer Putz, rote Ziegeldächer, an jeder zweiten Hälfte eine Gaube, zwischen den Paaren die Garagen, grüne Haustüren.",
+  "ready": "2. Quartal 2027",
   "features": [
-   "Eigener Garten",
-   "Wärmepumpe und Solardach",
+   "Garage und Garten an jeder Hälfte",
+   "Rotes Ziegeldach mit Gaube",
    "Am Emscherweg"
   ],
   "features_en": [
-   "Private garden",
-   "Heat pump and solar roof",
+   "A garage and a garden for every half",
+   "Red clay roof with dormer",
    "On the Emscher path"
-  ]
+  ],
+  "style": {
+   "roofName": "Satteldach, Tonziegel",
+   "wallName": "Putz, cremeweiß",
+   "group": 2,
+   "gap": 5.6,
+   "garage": true,
+   "base": {
+    "wall": "plaster",
+    "brick": "0xf1ebdd",
+    "roofColor": "0xa9573d",
+    "doorColor": "0x355e4b",
+    "par": 6.6
+   },
+   "variants": [
+    {
+     "first": "plain",
+     "dormer": true
+    },
+    {
+     "first": "balcony"
+    }
+   ]
+  },
+  "rows": [
+   {
+    "name": "Zeile A",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "02",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "03",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 128,
+      "price": "555.000 €"
+     },
+     {
+      "no": "04",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "05",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "06",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 128,
+      "price": "564.000 €"
+     }
+    ]
+   },
+   {
+    "name": "Zeile B",
+    "houses": [
+     {
+      "no": "07",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "08",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 128,
+      "price": "555.000 €"
+     },
+     {
+      "no": "09",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "10",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 128
+     },
+     {
+      "no": "11",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 128,
+      "price": "564.000 €"
+     },
+     {
+      "no": "12",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 128,
+      "price": "567.000 €"
+     }
+    ]
+   },
+   {
+    "name": "Zeile C",
+    "houses": [
+     {
+      "no": "13",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 134,
+      "price": "569.000 €"
+     },
+     {
+      "no": "14",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "15",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "16",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 134,
+      "price": "578.000 €"
+     },
+     {
+      "no": "17",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "18",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     }
+    ]
+   },
+   {
+    "name": "Zeile D",
+    "houses": [
+     {
+      "no": "19",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "20",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "21",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     },
+     {
+      "no": "22",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 134,
+      "price": "581.000 €"
+     },
+     {
+      "no": "23",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 134,
+      "price": "584.000 €"
+     },
+     {
+      "no": "24",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 134
+     }
+    ]
+   }
+  ],
+  "units": "24 Doppelhaushälften",
+  "free": 9,
+  "total": 24,
+  "size": "128 bis 134 m²",
+  "price": "ab 555.000 €",
+  "mix": "5 Zimmer mit Garten",
+  "rot": -162.4
  },
  {
-  "id": "buschei-park",
-  "name": "Buschei Park",
-  "mark": "BP",
+  "id": "buschei-holzhaeuser",
+  "name": "Buschei Holzhäuser",
+  "mark": "BH",
   "district": "Brackel · Hohenbuschei",
-  "lon": 7.55407,
+  "lon": 7.55349,
   "lat": 51.52888,
-  "form": "bars",
-  "floors": 4,
-  "clear": 70,
-  "price": "ab 299.000 €",
-  "size": "62 bis 128 m²",
-  "units": "58 Wohnungen",
-  "ready": "1. Quartal 2028",
-  "mix": "2 bis 5 Zimmer",
+  "clear": 36,
+  "type": "Holzhäuser",
   "en": {
    "district": "Brackel · Hohenbuschei",
-   "price": "from €299,000",
-   "size": "62 to 128 m²",
-   "units": "58 apartments",
+   "type": "Timber houses",
    "ready": "Q1 2028",
-   "mix": "2 to 5 rooms"
+   "arch": "Timber houses by the park: larch cladding, one roof slope that rises to the street with a band of clerestory glass, balconies, doors in blue-grey.",
+   "price": "from €502,000",
+   "size": "128 to 136 m²",
+   "units": "8 timber houses",
+   "mix": "4 to 5 rooms with garden"
   },
-  "features": [
-   "Wohnen am Park",
-   "Holzhybridbau",
-   "Spielhof"
-  ],
-  "features_en": [
-   "Living by the park",
-   "Timber hybrid construction",
-   "Play yard"
-  ]
- },
- {
-  "id": "harkort-gaerten",
-  "name": "Harkort Gärten",
-  "mark": "HG",
-  "district": "Hombruch",
-  "lon": 7.44011,
-  "lat": 51.47958,
-  "form": "terraces",
-  "floors": 5,
-  "clear": 60,
-  "price": "ab 329.000 €",
-  "size": "55 bis 136 m²",
-  "units": "42 Wohnungen",
-  "ready": "3. Quartal 2027",
-  "mix": "2 bis 4 Zimmer",
-  "en": {
-   "district": "Hombruch",
-   "price": "from €329,000",
-   "size": "55 to 136 m²",
-   "units": "42 apartments",
-   "ready": "Q3 2027",
-   "mix": "2 to 4 rooms"
-  },
-  "features": [
-   "Gestaffelte Dachgärten",
-   "Ruhige Hanglage",
-   "Markt um die Ecke"
-  ],
-  "features_en": [
-   "Stepped roof gardens",
-   "Quiet hillside",
-   "Market round the corner"
-  ]
- },
- {
-  "id": "hansa-terrassen",
-  "name": "Hansa Terrassen",
-  "mark": "HT",
-  "district": "Huckarde",
-  "lon": 7.41331,
-  "lat": 51.53728,
-  "form": "slab",
-  "floors": 9,
-  "clear": 65,
-  "price": "ab 239.000 €",
-  "size": "36 bis 104 m²",
-  "units": "88 Wohnungen",
-  "ready": "4. Quartal 2027",
-  "mix": "Studios, 2 bis 4 Zimmer",
-  "en": {
-   "district": "Huckarde",
-   "price": "from €239,000",
-   "size": "36 to 104 m²",
-   "units": "88 apartments",
-   "ready": "Q4 2027",
-   "mix": "Studios, 2 to 4 rooms"
-  },
-  "features": [
-   "Blick auf die Kokerei Hansa",
-   "Laubengänge nach Süden",
-   "Gemeinschaftsküche"
-  ],
-  "features_en": [
-   "View of the Hansa coking plant",
-   "South-facing access galleries",
-   "Shared kitchen"
-  ]
- },
- {
-  "id": "floriansblick",
-  "name": "Floriansblick",
-  "mark": "FB",
-  "district": "Westfalenpark",
-  "lon": 7.48307,
-  "lat": 51.50156,
-  "form": "tower",
-  "floors": 17,
-  "clear": 55,
-  "price": "ab 359.000 €",
-  "size": "47 bis 188 m²",
-  "units": "102 Wohnungen",
+  "arch": "Holzhäuser am Park: Lärchenschalung, ein Pultdach, das zur Straße ansteigt und ein Oberlichtband trägt, Balkone, Türen in Blaugrau.",
   "ready": "1. Quartal 2028",
-  "mix": "2 bis 5 Zimmer, Penthouses",
-  "en": {
-   "district": "Westfalenpark",
-   "price": "from €359,000",
-   "size": "47 to 188 m²",
-   "units": "102 apartments",
-   "ready": "Q1 2028",
-   "mix": "2 to 5 rooms, penthouses"
-  },
   "features": [
-   "Der Florianturm vor dem Fenster",
-   "Wintergärten",
-   "Direkt am Park"
+   "Holzbau mit Lärchenschalung",
+   "Pultdach mit Oberlichtband",
+   "Wohnen am Park"
   ],
   "features_en": [
-   "The Florian tower outside your window",
-   "Winter gardens",
-   "Right at the park"
-  ]
+   "Timber construction, larch cladding",
+   "Mono-pitch roof with clerestory",
+   "Living by the park"
+  ],
+  "style": {
+   "roofName": "Pultdach, begrünt",
+   "wallName": "Lärche",
+   "base": {
+    "wall": "wood",
+    "brick": "0xb98a5b",
+    "roof": "mono",
+    "roofColor": "0x66735f",
+    "doorColor": "0x33424d",
+    "par": 6.6
+   },
+   "variants": [
+    {
+     "first": "balcony"
+    },
+    {
+     "first": "plain",
+     "setback": -0.4
+    }
+   ],
+   "open": true
+  },
+  "rows": [
+   {
+    "name": "Zeile A",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 136
+     },
+     {
+      "no": "02",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 128,
+      "price": "502.000 €"
+     },
+     {
+      "no": "03",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 136
+     },
+     {
+      "no": "04",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 128,
+      "price": "510.000 €"
+     }
+    ]
+   },
+   {
+    "name": "Zeile B",
+    "houses": [
+     {
+      "no": "05",
+      "status": "Frei",
+      "rooms": 5,
+      "area": 136,
+      "price": "524.000 €"
+     },
+     {
+      "no": "06",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 128
+     },
+     {
+      "no": "07",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 136
+     },
+     {
+      "no": "08",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 128
+     }
+    ]
+   }
+  ],
+  "units": "8 Holzhäuser",
+  "free": 3,
+  "total": 8,
+  "size": "128 bis 136 m²",
+  "price": "ab 502.000 €",
+  "mix": "4 bis 5 Zimmer mit Garten",
+  "rot": -143.2
+ },
+ {
+  "id": "kronenhoefe",
+  "name": "Kronenhöfe",
+  "mark": "KR",
+  "district": "Stadtkrone Ost",
+  "lon": 7.51009,
+  "lat": 51.50672,
+  "clear": 31,
+  "type": "Reihenhäuser",
+  "en": {
+   "district": "Stadtkrone Ost",
+   "type": "Terraced houses",
+   "ready": "Q2 2028",
+   "arch": "Sand-coloured brick under dark slate: every house with a zinc dormer, a stone frame or a bay on the first floor, front doors in night blue.",
+   "price": "from €533,000",
+   "size": "134 to 142 m²",
+   "units": "6 terraced houses",
+   "mix": "4 to 5 rooms with garden"
+  },
+  "arch": "Sandfarbener Ziegel unter dunklem Schiefer: jedes Haus mit einer Zinkgaube, im ersten Stock ein Steinrahmen oder ein Erker, Haustüren in Nachtblau.",
+  "ready": "2. Quartal 2028",
+  "features": [
+   "Gaube in jedem Dach",
+   "Sandfarbener Ziegel, Schieferdach",
+   "Stadtbahn in fünf Minuten"
+  ],
+  "features_en": [
+   "A dormer in every roof",
+   "Sand-coloured brick, slate roof",
+   "Light rail in five minutes"
+  ],
+  "style": {
+   "roofName": "Satteldach mit Gaube, Schiefer",
+   "wallName": "Ziegel, sandfarben",
+   "base": {
+    "brick": "0xdcc596",
+    "roofColor": "0x474c55",
+    "doorColor": "0x1f3a5f",
+    "dormer": true,
+    "par": 6.8
+   },
+   "variants": [
+    {
+     "first": "frame"
+    },
+    {
+     "first": "bay",
+     "setback": -0.3
+    }
+   ]
+  },
+  "rows": [
+   {
+    "name": "Zeile",
+    "houses": [
+     {
+      "no": "01",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 142
+     },
+     {
+      "no": "02",
+      "status": "Verkauft",
+      "rooms": 4,
+      "area": 134
+     },
+     {
+      "no": "03",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 142
+     },
+     {
+      "no": "04",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 134,
+      "price": "533.000 €"
+     },
+     {
+      "no": "05",
+      "status": "Verkauft",
+      "rooms": 5,
+      "area": 142
+     },
+     {
+      "no": "06",
+      "status": "Frei",
+      "rooms": 4,
+      "area": 134,
+      "price": "543.000 €"
+     }
+    ]
+   }
+  ],
+  "units": "6 Reihenhäuser",
+  "free": 2,
+  "total": 6,
+  "size": "134 bis 142 m²",
+  "price": "ab 533.000 €",
+  "mix": "4 bis 5 Zimmer mit Garten",
+  "rot": -2.9
  }
 ]

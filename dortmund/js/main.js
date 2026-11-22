@@ -26,22 +26,23 @@ const COL = {
 
 // ------------------------------------------------------------------------------------------------ text
 const I18N = {
-  de: { menu: 'Menü', district: 'Stadtteil', contact: 'Kontakt', projects: 'Projekte', projectsSub: 'Zwölf Neubauprojekte in Dortmund. Wählen Sie eines, die Karte fliegt hin.',
+  de: { menu: 'Menü', district: 'Stadtteil', contact: 'Kontakt', projects: 'Projekte', projectsSub: 'Sechs Neubauprojekte in Dortmund. Wählen Sie eines, die Karte fliegt hin.',
     invented: 'Alle Projekte, Preise und Daten sind erfunden.', price: 'Kaufpreis', size: 'Wohnfläche', ready: 'Fertigstellung', discover: 'Entdecken',
     contactTitle: 'Rückruf anfordern', contactText: 'Das ist eine Demo: Hier stünde das Kontaktformular des Maklers. Es wird nichts gesendet.', contactCta: 'Verstanden',
     hint: isTouch ? 'Karte ziehen · zoomen' : 'Karte bewegen', loading: 'Lädt', all: 'Ganz Dortmund', city: 'City',
-    details: 'Datenblatt', units: 'Einheiten', floors: 'Geschosse', mix: 'Wohnungsmix', features: 'Besonderheiten', call: 'Rückruf anfordern', back: 'Zurück zur Karte',
+    details: 'Datenblatt', units: 'Einheiten', free: 'Frei', freeWord: 'frei', arch: 'Architektur', type: 'Bauform', mix: 'Wohnungsmix', features: 'Besonderheiten', call: 'Rückruf anfordern', back: 'Zurück zur Karte',
     maps: 'Google Maps', spin: 'Drehen', inside: 'Häuser ansehen', site: 'Lage in 3D', hintObj: 'Ziehen zum Drehen' },
-  en: { menu: 'Menu', district: 'District', contact: 'Reach out', projects: 'Projects', projectsSub: 'Twelve new developments in Dortmund. Pick one and the map flies there.',
+  en: { menu: 'Menu', district: 'District', contact: 'Reach out', projects: 'Projects', projectsSub: 'Six new developments in Dortmund. Pick one and the map flies there.',
     invented: 'All projects, prices and dates are invented.', price: 'Price', size: 'Living area', ready: 'Handover', discover: 'Discover',
     contactTitle: 'Request a call', contactText: 'This is a demo: the agent\'s contact form would be here. Nothing is sent.', contactCta: 'Got it',
     hint: isTouch ? 'Drag the map · pinch to zoom' : 'Move around', loading: 'Loading', all: 'All of Dortmund', city: 'City centre',
-    details: 'Data sheet', units: 'Units', floors: 'Storeys', mix: 'Unit mix', features: 'Notable features', call: 'Request a call', back: 'Return to map',
+    details: 'Data sheet', units: 'Units', free: 'Available', freeWord: 'free', arch: 'Architecture', type: 'Type', mix: 'Unit mix', features: 'Notable features', call: 'Request a call', back: 'Return to map',
     maps: 'Google Maps', spin: 'Rotate', inside: 'View the houses', site: 'Location in 3D', hintObj: 'Drag to rotate' },
 };
 let lang = (Q.get('lang') || localStorage.getItem('wf-lang') || 'de') === 'en' ? 'en' : 'de';
 const T = (k) => I18N[lang][k] ?? k;
 const pf = (p, k) => (lang === 'en' && p.en && p.en[k]) || p[k];
+const freeOf = (p) => (lang === 'en' ? `${p.free} of ${p.total}` : `${p.free} von ${p.total}`);
 
 // ------------------------------------------------------------------------------------------------ renderer
 const canvas = $('gl');
@@ -399,7 +400,7 @@ function stepLabels() {
 let PROJECTS = [], active = null;
 const projGroup = new THREE.Group(); scene.add(projGroup);
 const v3 = new THREE.Vector3(), sph = new THREE.Sphere();
-const projScale = () => (OBJ ? 1 : clamp(cam.dist / 2400, 1, 2.8));        // far away the models grow, so they stay findable
+const projScale = () => (OBJ ? 1 : clamp(cam.dist / 1500, 1, 4.2));        // far away the models grow, so they stay findable
 function buildProjects(meta) {
   const mat = projectMaterial();
   for (const p of PROJECTS) {
@@ -439,11 +440,12 @@ function openProject(p, quick = false) {
   active?.pin.classList.remove('on'); active = p; p.pin.classList.add('on');
   $('popMark').textContent = p.mark; $('popName').textContent = p.name; $('popDistrict').textContent = pf(p, 'district');
   $('popPrice').textContent = pf(p, 'price'); $('popSize').textContent = pf(p, 'size'); $('popReady').textContent = pf(p, 'ready');
+  $('popFree').textContent = freeOf(p); $('popType').textContent = pf(p, 'type');
   $('popLink').href = HOUSES + p.id;                                  // the five houses of the project: which are free, which are sold
   $('popSite').href = `objekt.html?id=${p.id}${lang === 'en' ? '&lang=en' : ''}`;
   $('popup').hidden = false; $('live').textContent = `${p.name}, ${pf(p, 'district')}, ${pf(p, 'price')}`;
   // fly so that the building sits in the lower half and the card has room above it
-  const d = clamp(Math.min(cam.dist, 1500), 700, 1500), off = d * 0.16;
+  const d = clamp(Math.min(cam.dist, 900), 420, 900), off = d * 0.16;
   flyTo({ x: p.x - Math.sin(cam.az) * off, z: p.z - Math.cos(cam.az) * off, dist: d }, quick ? 0.01 : 1.4);
   closeAll(); interacted(); invalidate();
 }
@@ -498,7 +500,7 @@ function buildUi() {
     const li = document.createElement('li'), b = document.createElement('button');
     b.innerHTML = `<span class="mark"></span><span class="t"><b></b><span></span></span><span class="p"></span>`;
     b.querySelector('.mark').textContent = p.mark; b.querySelector('b').textContent = p.name;
-    b.querySelector('.t span').textContent = pf(p, 'district'); b.querySelector('.p').textContent = pf(p, 'price');
+    b.querySelector('.t span').textContent = `${pf(p, 'type')} · ${pf(p, 'district')}`; b.querySelector('.p').innerHTML = `${pf(p, 'price')}<small>${freeOf(p)} ${T('freeWord')}</small>`;
     b.addEventListener('click', () => openProject(p)); li.appendChild(b); pl.appendChild(li);
   }
   if (active) openProject(active, true);
@@ -510,7 +512,7 @@ function fillSheet() {
   document.title = `${p.name} · Wohnungsfinder Dortmund`;
   $('oMark').textContent = p.mark; $('oName').textContent = p.name; $('oDistrict').textContent = pf(p, 'district');
   $('oPrice').textContent = pf(p, 'price'); $('oSize').textContent = pf(p, 'size'); $('oUnits').textContent = pf(p, 'units');
-  $('oFloors').textContent = String(p.floors); $('oReady').textContent = pf(p, 'ready'); $('oMix').textContent = pf(p, 'mix');
+  $('oFree').textContent = freeOf(p); $('oReady').textContent = pf(p, 'ready'); $('oMix').textContent = pf(p, 'mix'); $('oArch').textContent = pf(p, 'arch');
   $('oFeatures').innerHTML = ''; for (const f of (lang === 'en' && p.features_en) || p.features) { const li = document.createElement('li'); li.textContent = f; $('oFeatures').appendChild(li); }
   const back = `./?p=${p.id}${lang === 'en' ? '&lang=en' : ''}`; $('backLink').href = back; $('homeLink').href = back;
   $('mapsLink').href = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lon}`;
@@ -583,7 +585,7 @@ async function start() {
   renderer.compile(scene, camera);
   bar.style.width = '100%';
   if (OBJ) {
-    const d = innerWidth <= 760 ? 620 : 520;
+    const d = innerWidth <= 760 ? 430 : 360;
     Object.assign(cam, { x: THE.x, z: THE.z, dist: REDUCED ? d : d * 2.4, az: 0.7 }); goalDist = d; layoutObj(); placeCamera();
     addEventListener('resize', () => setTimeout(layoutObj, 120), { passive: true });
   } else if (focus) { Object.assign(cam, { x: focus.x, z: focus.z, dist: 1400 }); goalDist = 1400; openProject(focus, true); $('hint').classList.add('off'); }
