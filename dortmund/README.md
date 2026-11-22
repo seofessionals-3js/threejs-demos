@@ -1,6 +1,6 @@
 # Wohnungsfinder Dortmund · die Karte
 
-Ganz Dortmund als interaktive 3D-Karte in three.js: 26 × 23 km, jede Straße, jedes Gewässer, jede Grünfläche und rund 379.000 Gebäude aus OpenStreetMap. Zwölf erfundene Neubauprojekte stehen als violette Modelle darauf. Ein Klick öffnet die Karte des Projekts, „Entdecken" lädt seine eigene Seite: das Gebäude in seiner echten Nachbarschaft, drehbar, mit Datenblatt.
+Ganz Dortmund als interaktive 3D-Karte in three.js: 26 × 23 km, jede Straße, jedes Gewässer, jede Grünfläche und rund 379.000 Gebäude aus OpenStreetMap. Sechs erfundene Neubauprojekte stehen darauf, jedes als kleiner Lageplan mit seinen Häusern: freie Grundstücke grün, verkaufte rot. Ein Klick öffnet die Karte des Projekts, „Entdecken" lädt seine eigene Seite: das Gebäude in seiner echten Nachbarschaft, drehbar, mit Datenblatt.
 
 Vorbild für Aufbau und Funktionen ist die Dubai-Karte von Todor3D für Evolutions: eine Kartenseite, eine Seite pro Immobilie.
 
@@ -8,11 +8,11 @@ Vorbild für Aufbau und Funktionen ist die Dubai-Karte von Todor3D für Evolutio
 
 - **Karte bewegen:** ziehen zum Verschieben, Mausrad oder zwei Finger zum Zoomen, rechte Maustaste oder Drehgeste zum Drehen, Pfeiltasten, `+` und `−`, `Q` und `E`. Die Kamera schaut aus der Ferne fast senkrecht und neigt sich beim Näherkommen.
 - **Gebäude wachsen:** In der Übersicht sind die Häuser flache Blöcke. Wer näher kommt, bekommt rund um den Blick alle Gebäude mit ihrer Höhe; sie wachsen aus dem Boden.
-- **Projekte:** Pins über den Modellen, aus der Ferne nur das Kürzel. Klick auf Pin oder Gebäude: Die Kamera fliegt hin, eine Karte nennt Lage, Kaufpreis, Wohnfläche und Fertigstellung. „Entdecken" führt zu den fünf Häusern des Projekts (`/threejs-demo-7/haeuser/`): jedes anklickbar und begehbar, drei verkauft, zwei frei. „Lage in 3D" führt zur Projektseite.
+- **Projekte:** Pins über den Modellen, aus der Ferne nur das Kürzel. Klick auf Pin oder Gebäude: Die Kamera fliegt hin, eine Karte nennt Lage, Kaufpreis, Wohnfläche und Fertigstellung. „Entdecken" führt zu den Häusern des Projekts (`/threejs-demo-7/haeuser/`): jedes anklickbar und begehbar, mit seinem Stand. „Lage in 3D" führt zur Projektseite.
 - **Stadtteil-Auswahl:** fliegt zu 16 Stadtteilen oder zurück zur Übersicht.
 - **Menü:** die Liste aller Projekte.
 - **Sprache:** Deutsch und Englisch.
-- **Projektseite** (`objekt.html?id=…`): Das Modell dreht sich langsam in seiner Nachbarschaft, daneben das Datenblatt, darunter „Zurück zur Karte", Google Maps und „Drehen". „Häuser ansehen" führt zu den fünf Häusern.
+- **Projektseite** (`objekt.html?id=…`): Das Modell dreht sich langsam in seiner Nachbarschaft, daneben das Datenblatt, darunter „Zurück zur Karte", Google Maps und „Drehen". „Häuser ansehen" führt zu den Häusern.
 
 ## So ist sie gebaut
 
@@ -21,7 +21,7 @@ Vorbild für Aufbau und Funktionen ist die Dubai-Karte von Todor3D für Evolutio
 - **Nichts ruckelt beim Nachladen:** Ein Worker (`js/worker.js`) entpackt die Dateien und baut Dächer und Wände samt eingebackenem Licht abseits des Hauptfadens.
 - **Kein Licht, keine Schatten zur Laufzeit:** Alle Farben stehen in den Eckpunkten. Die Karte zeichnet nur, wenn sich etwas bewegt, und nichts, solange die Seite verborgen ist. Flächen und Gebäudeblöcke sind in 4-km-Stücke geteilt, damit nur gezeichnet wird, was die Kamera sieht.
 - **Geräte:** `js/quality.js` wählt die Auflösung nach Gerät und regelt nach. Handys laden einen kleineren Umkreis an Gebäuden und lassen Schuppen und Garagen weg.
-- **Projekte als Code:** `js/models.js` baut die zwölf Gebäude aus wenigen Formen (Turm, Scheibe, Terrassenhaus, Hofblock, Zeilen, Stadthäuser, Speicher). Ihre Daten stehen in `js/projects.json`.
+- **Projekte als Daten:** `js/projects.json` beschreibt jedes Projekt: Architektur (Wand, Dach, Erker, Gaube), Zeilen und für jedes Haus Nummer, Stand, Zimmer, Fläche und Preis. `js/models.js` baut daraus den Lageplan auf der Karte, die Häuserseite (`/threejs-demo-7/haeuser/`) baut daraus dieselben Häuser im Detail. `tools/place.py` dreht jedes Projekt so, dass seine Zeilen an der nächsten Straße liegen.
 
 ## Karte neu bauen
 

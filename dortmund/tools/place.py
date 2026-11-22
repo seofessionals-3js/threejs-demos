@@ -40,4 +40,14 @@ for q in P:
     _, dx, dz, lost = best
     q['lon'] = round(M['lon0'] + (x0 + dx) / M['kx'], 5); q['lat'] = round(M['lat0'] - (z0 + dz) / M['kz'], 5)
     print(f"{q['id']:16s} moved {dx:5d} {dz:5d} m, buildings replaced {lost:6.0f} m²")
+# every project is turned so that its rows run along the nearest street
+roads = big + small; RT = STRtree(roads)
+for q in P:
+    pt = Point((q['lon'] - M['lon0']) * M['kx'], -(q['lat'] - M['lat0']) * M['kz'])
+    cand = [roads[i] for i in RT.query(pt.buffer(400))]
+    if not cand: q['rot'] = 0; continue
+    l = min(cand, key=lambda g: g.distance(pt)); d = l.project(pt)
+    a, b = l.interpolate(max(0, d - 4)), l.interpolate(min(l.length, d + 4))
+    q['rot'] = round(math.degrees(math.atan2(-(b.y - a.y), b.x - a.x)), 1)
+    print(f"{q['id']:20s} rows turned by {q['rot']:6.1f} degrees, street {l.distance(pt):4.0f} m away")
 json.dump(P, open(PJ, 'w'), ensure_ascii=False, indent=1)

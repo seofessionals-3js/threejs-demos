@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1f2023">
 <title>Wohnungsfinder Dortmund · Karte</title>
-<meta name="description" content="Dortmund als interaktive 3D-Karte: zwölf Neubauprojekte, jedes Gebäude der Stadt, live in three.js.">
+<meta name="description" content="Dortmund als interaktive 3D-Karte: sechs Neubauprojekte, jedes Gebäude der Stadt, live in three.js.">
 <link rel="preload" href="fonts/Manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/map.css">
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js">
@@ -35,7 +35,7 @@
 
 <aside id="menu" class="panel" hidden>
   <div class="panel-head"><h2 data-i18n="projects">Projekte</h2><button class="x" id="menuClose" aria-label="Schließen">✕</button></div>
-  <p class="panel-sub" data-i18n="projectsSub">Zwölf Neubauprojekte in Dortmund. Wählen Sie eines, die Karte fliegt hin.</p>
+  <p class="panel-sub" data-i18n="projectsSub">Sechs Neubauprojekte in Dortmund. Wählen Sie eines, die Karte fliegt hin.</p>
   <ul id="projectList"></ul>
   <p class="panel-foot" data-i18n="invented">Alle Projekte, Preise und Daten sind erfunden.</p>
 </aside>
@@ -44,6 +44,8 @@
   <button class="x" id="popClose" aria-label="Schließen">✕</button>
   <div class="pop-top"><span class="mark" id="popMark"></span><div><h3 id="popName"></h3><p id="popDistrict"></p></div></div>
   <dl>
+    <div><dt data-i18n="type">Bauform</dt><dd id="popType"></dd></div>
+    <div><dt data-i18n="free">Frei</dt><dd id="popFree" class="free"></dd></div>
     <div><dt data-i18n="price">Kaufpreis</dt><dd id="popPrice"></dd></div>
     <div><dt data-i18n="size">Wohnfläche</dt><dd id="popSize"></dd></div>
     <div><dt data-i18n="ready">Fertigstellung</dt><dd id="popReady"></dd></div>
