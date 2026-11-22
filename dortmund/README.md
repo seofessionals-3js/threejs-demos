@@ -8,11 +8,11 @@ Vorbild für Aufbau und Funktionen ist die Dubai-Karte von Todor3D für Evolutio
 
 - **Karte bewegen:** ziehen zum Verschieben, Mausrad oder zwei Finger zum Zoomen, rechte Maustaste oder Drehgeste zum Drehen, Pfeiltasten, `+` und `−`, `Q` und `E`. Die Kamera schaut aus der Ferne fast senkrecht und neigt sich beim Näherkommen.
 - **Gebäude wachsen:** In der Übersicht sind die Häuser flache Blöcke. Wer näher kommt, bekommt rund um den Blick alle Gebäude mit ihrer Höhe; sie wachsen aus dem Boden.
-- **Projekte:** Pins über den Modellen, aus der Ferne nur das Kürzel. Klick auf Pin oder Gebäude: Die Kamera fliegt hin, eine Karte nennt Lage, Kaufpreis, Wohnfläche und Fertigstellung.
+- **Projekte:** Pins über den Modellen, aus der Ferne nur das Kürzel. Klick auf Pin oder Gebäude: Die Kamera fliegt hin, eine Karte nennt Lage, Kaufpreis, Wohnfläche und Fertigstellung. „Entdecken" führt zu den fünf Häusern des Projekts (`/threejs-demo-7/haeuser/`): jedes anklickbar und begehbar, drei verkauft, zwei frei. „Lage in 3D" führt zur Projektseite.
 - **Stadtteil-Auswahl:** fliegt zu 16 Stadtteilen oder zurück zur Übersicht.
 - **Menü:** die Liste aller Projekte.
 - **Sprache:** Deutsch und Englisch.
-- **Projektseite** (`objekt.html?id=…`): Das Modell dreht sich langsam in seiner Nachbarschaft, daneben das Datenblatt, darunter „Zurück zur Karte", Google Maps und „Drehen". Der Rundgang durch eine Musterwohnung („Innen ansehen") ist vorbereitet und folgt.
+- **Projektseite** (`objekt.html?id=…`): Das Modell dreht sich langsam in seiner Nachbarschaft, daneben das Datenblatt, darunter „Zurück zur Karte", Google Maps und „Drehen". „Häuser ansehen" führt zu den fünf Häusern.
 
 ## So ist sie gebaut
 

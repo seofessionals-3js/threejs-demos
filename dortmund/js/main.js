@@ -15,6 +15,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HOUSES = '/threejs-demo-7/haeuser/?id=';            // the page of a project's houses lives in the Wohnungsfinder repository
 const OBJ = document.body.dataset.page === 'objekt';       // objekt.html: one project in its neighbourhood, the camera circles it
 const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
 
@@ -30,13 +31,13 @@ const I18N = {
     contactTitle: 'Rückruf anfordern', contactText: 'Das ist eine Demo: Hier stünde das Kontaktformular des Maklers. Es wird nichts gesendet.', contactCta: 'Verstanden',
     hint: isTouch ? 'Karte ziehen · zoomen' : 'Karte bewegen', loading: 'Lädt', all: 'Ganz Dortmund', city: 'City',
     details: 'Datenblatt', units: 'Einheiten', floors: 'Geschosse', mix: 'Wohnungsmix', features: 'Besonderheiten', call: 'Rückruf anfordern', back: 'Zurück zur Karte',
-    maps: 'Google Maps', spin: 'Drehen', inside: 'Innen ansehen · folgt', hintObj: 'Ziehen zum Drehen' },
+    maps: 'Google Maps', spin: 'Drehen', inside: 'Häuser ansehen', site: 'Lage in 3D', hintObj: 'Ziehen zum Drehen' },
   en: { menu: 'Menu', district: 'District', contact: 'Reach out', projects: 'Projects', projectsSub: 'Twelve new developments in Dortmund. Pick one and the map flies there.',
     invented: 'All projects, prices and dates are invented.', price: 'Price', size: 'Living area', ready: 'Handover', discover: 'Discover',
     contactTitle: 'Request a call', contactText: 'This is a demo: the agent\'s contact form would be here. Nothing is sent.', contactCta: 'Got it',
     hint: isTouch ? 'Drag the map · pinch to zoom' : 'Move around', loading: 'Loading', all: 'All of Dortmund', city: 'City centre',
     details: 'Data sheet', units: 'Units', floors: 'Storeys', mix: 'Unit mix', features: 'Notable features', call: 'Request a call', back: 'Return to map',
-    maps: 'Google Maps', spin: 'Rotate', inside: 'View inside · soon', hintObj: 'Drag to rotate' },
+    maps: 'Google Maps', spin: 'Rotate', inside: 'View the houses', site: 'Location in 3D', hintObj: 'Drag to rotate' },
 };
 let lang = (Q.get('lang') || localStorage.getItem('wf-lang') || 'de') === 'en' ? 'en' : 'de';
 const T = (k) => I18N[lang][k] ?? k;
@@ -438,7 +439,8 @@ function openProject(p, quick = false) {
   active?.pin.classList.remove('on'); active = p; p.pin.classList.add('on');
   $('popMark').textContent = p.mark; $('popName').textContent = p.name; $('popDistrict').textContent = pf(p, 'district');
   $('popPrice').textContent = pf(p, 'price'); $('popSize').textContent = pf(p, 'size'); $('popReady').textContent = pf(p, 'ready');
-  $('popLink').href = `objekt.html?id=${p.id}${lang === 'en' ? '&lang=en' : ''}`;
+  $('popLink').href = HOUSES + p.id;                                  // the five houses of the project: which are free, which are sold
+  $('popSite').href = `objekt.html?id=${p.id}${lang === 'en' ? '&lang=en' : ''}`;
   $('popup').hidden = false; $('live').textContent = `${p.name}, ${pf(p, 'district')}, ${pf(p, 'price')}`;
   // fly so that the building sits in the lower half and the card has room above it
   const d = clamp(Math.min(cam.dist, 1500), 700, 1500), off = d * 0.16;
@@ -512,6 +514,7 @@ function fillSheet() {
   $('oFeatures').innerHTML = ''; for (const f of (lang === 'en' && p.features_en) || p.features) { const li = document.createElement('li'); li.textContent = f; $('oFeatures').appendChild(li); }
   const back = `./?p=${p.id}${lang === 'en' ? '&lang=en' : ''}`; $('backLink').href = back; $('homeLink').href = back;
   $('mapsLink').href = `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lon}`;
+  $('insideLink').href = HOUSES + p.id;
 }
 function layoutObj() {            // keep the model in the free part of the screen: left of the sheet, or above it on a phone
   const sh = $('sheet'); if (!sh) return;
