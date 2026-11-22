@@ -15,7 +15,30 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const HOUSES = '/threejs-demo-7/haeuser/?id=';            // the page of a project's houses lives in the Wohnungsfinder repository
+// The page of a project's houses lives in the Wohnungsfinder repository. at=310: arrive at the row with its states,
+// without the title sequence. Both pages load the same three.js file, so it is in the cache already.
+const HOUSES = '/threejs-demo-7/haeuser/?at=310&id=';
+// Getting there fast. Once the map stands, the files of the houses page are fetched into the cache. When a card
+// is open and the camera has landed, the browser is asked to prepare that very page in the background
+// (speculation rules: Chrome and Edge build it completely, so the click shows it at once; others ignore the hint).
+const hint = (href, as) => { const l = document.createElement('link'); l.rel = 'prefetch'; l.href = href; if (as) l.as = as; document.head.appendChild(l); };
+function warmHouses() {
+  for (const f of ['engine/elevation.js', 'engine/quality.js', 'haeuser/page.js']) hint('/threejs-demo-7/' + f, 'script');
+  hint('/threejs-demo-7/engine/page.css', 'style');
+  hint('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap', 'style');
+}
+let specEl = null, specT = 0;
+function prepare(url) {
+  clearTimeout(specT);
+  if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('speculationrules')) { if (url) hint(url, 'document'); return; }
+  specT = setTimeout(() => {
+    specEl?.remove(); specEl = null;
+    if (!url) return;
+    specEl = document.createElement('script'); specEl.type = 'speculationrules';
+    specEl.textContent = JSON.stringify({ prerender: [{ urls: [url] }] });
+    document.head.appendChild(specEl);
+  }, url ? 1700 : 0);
+}
 const OBJ = document.body.dataset.page === 'objekt';       // objekt.html: one project in its neighbourhood, the camera circles it
 const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
 
@@ -441,7 +464,8 @@ function openProject(p, quick = false) {
   $('popMark').textContent = p.mark; $('popName').textContent = p.name; $('popDistrict').textContent = pf(p, 'district');
   $('popPrice').textContent = pf(p, 'price'); $('popSize').textContent = pf(p, 'size'); $('popReady').textContent = pf(p, 'ready');
   $('popFree').textContent = freeOf(p); $('popType').textContent = pf(p, 'type');
-  $('popLink').href = HOUSES + p.id;                                  // the five houses of the project: which are free, which are sold
+  $('popLink').href = HOUSES + p.id;                                  // the houses of the project: which are free, which are sold
+  if (!quick) prepare(HOUSES + p.id);
   $('popSite').href = `objekt.html?id=${p.id}${lang === 'en' ? '&lang=en' : ''}`;
   $('popup').hidden = false; $('live').textContent = `${p.name}, ${pf(p, 'district')}, ${pf(p, 'price')}`;
   // fly so that the building sits in the lower half and the card has room above it
@@ -449,7 +473,7 @@ function openProject(p, quick = false) {
   flyTo({ x: p.x - Math.sin(cam.az) * off, z: p.z - Math.cos(cam.az) * off, dist: d }, quick ? 0.01 : 1.4);
   closeAll(); interacted(); invalidate();
 }
-function closePopup() { if (!active || OBJ) return; active.pin.classList.remove('on'); active = null; $('popup').hidden = true; invalidate(); }
+function closePopup() { if (!active || OBJ) return; prepare(null); active.pin.classList.remove('on'); active = null; $('popup').hidden = true; invalidate(); }
 function stepOverlay() {
   const s = projScale(), far = cam.dist > 5200;
   if (OBJ) return;
@@ -592,6 +616,7 @@ async function start() {
   else if (!Q.has('still') && !REDUCED) { Object.assign(cam, { dist: Math.min(maxDist(), h.dist * 2.1), az: -0.55, z: h.z + 1800 }); goalDist = cam.dist; placeCamera(); setTimeout(() => flyTo(h, 2.6), 350); }
   requestAnimationFrame(() => { $('loader').classList.add('done'); setTimeout(() => $('loader').remove(), 900); });
   gov.hold(2500);
+  (window.requestIdleCallback || setTimeout)(warmHouses, { timeout: 4000 });
   window.__map = { cam, flyTo, tiles, PROJECTS, renderer, get info() { return renderer.info.render; } };
   requestAnimationFrame(frame);
 }
