@@ -1,6 +1,6 @@
 # three.js Demos
 
-Sechs Wege, eine flache Architekturzeichnung in ein 3D-Erlebnis zu verwandeln, durch das man scrollt. Diese Seite ist die Übersicht: Sie lädt alle sechs Demos in einem Fenster und lässt Sie zwischen ihnen und ihren Varianten wechseln.
+Sechs Wege, ein Bauprojekt im Browser begehbar zu machen: aus Plänen und Zeichnungen wird ein 3D-Erlebnis, durch das man scrollt. Jede dieser Ansichten kann auf der Website eines Bauunternehmens stehen, direkt unter dem jeweiligen Bauprojekt, ohne App und ohne Download, auf dem Handy genauso wie auf dem Laptop. Diese Seite ist die Übersicht: Sie beginnt mit einer Startseite, die das erklärt und die sechs Techniken zur Wahl stellt, lädt jede Demo in einem Fenster und lässt Sie zwischen ihnen und ihren Varianten wechseln.
 
 [**Übersicht live ansehen**](https://seofessionals-3js.github.io/threejs-demos/) · läuft auf Laptop, Tablet und Handy
 
@@ -8,12 +8,12 @@ Sechs Wege, eine flache Architekturzeichnung in ein 3D-Erlebnis zu verwandeln, d
 
 | | Demo | Technik | Was passiert | Code |
 |---|---|---|---|---|
-| 1 | **[three.js Demo 1](https://seofessionals-3js.github.io/threejs-demo-6/)** | Kartonmodell | Ein weißes Kartonmodell nachts auf dem Tisch. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus. | [Code](https://github.com/seofessionals-3js/threejs-demo-6) |
-| 2 | **[three.js Demo 2](https://seofessionals-3js.github.io/threejs-demo-4/)** | Bauzeitraffer | Projekt Steininger: sechs Zeichnungen eines Hauses, Phase für Phase. Die Baustelle entsteht aus Scanlinien, dann gehen Sie durch drei Geschosse, die sich Woche für Woche einrichten, bis zur Übergabe am Pool. | [Code](https://github.com/seofessionals-3js/threejs-demo-4) |
-| 3 | **[three.js Demo 3](https://seofessionals-3js.github.io/threejs-demo-2/)** | Schnitt-Scan | Ein Schnitt öffnet sich in die Tiefe, ein Scan macht aus Tusche Material und aus den gezeichneten Sonnenwinkeln echte Sonnenstrahlen. Dann gehen Sie durch den Schnitt hinein. | [Code](https://github.com/seofessionals-3js/threejs-demo-2) |
-| 4 | **[three.js Demo 4](https://seofessionals-3js.github.io/threejs-demo-5/?dir=a)** | Bauzeitenplan | Projekt Steininger nach Plan: Scrollen Sie durch 38 Wochen Bauzeitenplan, und das Travertinhaus am Hang baut sich Balken für Balken selbst, samt Turmdrehkran. Dann öffnet sich die Tür zum Hof, und Sie gehen hinein bis an den Pool. | [Code](https://github.com/seofessionals-3js/threejs-demo-5) |
-| 5 | **[three.js Demo 5](https://seofessionals-3js.github.io/threejs-demo-3/?dir=a)** | Offener Schnitt | Ein flacher Schnitt zeichnet sich selbst. Das Objektiv öffnet sich, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene. | [Code](https://github.com/seofessionals-3js/threejs-demo-3) |
-| 6 | **[three.js Demo 6](https://seofessionals-3js.github.io/threejs-demo-1/?dir=a)** | Explosionsaxonometrie | Eine Explosionsaxonometrie setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein. | [Code](https://github.com/seofessionals-3js/threejs-demo-1) |
+| 1 | **[Kartonmodell](https://seofessionals-3js.github.io/threejs-demo-6/)** | Kartonmodell | Ein weißes Kartonmodell abends auf dem Tisch. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum gebauten Haus, dort wo er steht: mit Zedernholz, Licht in den Fenstern und beleuchteten Stufen. Das Atelier bleibt. | [Code](https://github.com/seofessionals-3js/threejs-demo-6) |
+| 2 | **[Bauzeitraffer](https://seofessionals-3js.github.io/threejs-demo-4/)** | Bauzeitraffer | Projekt Steininger: sechs Zeichnungen eines Hauses, Phase für Phase. Die Baustelle entsteht aus Scanlinien, dann gehen Sie durch drei Geschosse, die sich Woche für Woche einrichten, bis zur Übergabe am Pool. | [Code](https://github.com/seofessionals-3js/threejs-demo-4) |
+| 3 | **[Schnitt-Scan](https://seofessionals-3js.github.io/threejs-demo-2/)** | Schnitt-Scan | Ein Schnitt öffnet sich in die Tiefe, ein Scan macht aus Tusche Material und aus den gezeichneten Sonnenwinkeln echte Sonnenstrahlen. Dann gehen Sie durch den Schnitt hinein. | [Code](https://github.com/seofessionals-3js/threejs-demo-2) |
+| 4 | **[Bauzeitenplan](https://seofessionals-3js.github.io/threejs-demo-5/?dir=a)** | Bauzeitenplan | Projekt Steininger nach Plan: Scrollen Sie durch 38 Wochen Bauzeitenplan, und das Travertinhaus am Hang baut sich Balken für Balken selbst, samt Turmdrehkran. Dann öffnet sich die Tür zum Hof, und Sie gehen hinein bis an den Pool. | [Code](https://github.com/seofessionals-3js/threejs-demo-5) |
+| 5 | **[Offener Schnitt](https://seofessionals-3js.github.io/threejs-demo-3/?dir=a)** | Offener Schnitt | Ein flacher Schnitt zeichnet sich selbst. Das Objektiv öffnet sich, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene. | [Code](https://github.com/seofessionals-3js/threejs-demo-3) |
+| 6 | **[Explosionsaxonometrie](https://seofessionals-3js.github.io/threejs-demo-1/?dir=a)** | Explosionsaxonometrie | Eine Explosionsaxonometrie setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein. | [Code](https://github.com/seofessionals-3js/threejs-demo-1) |
 
 Die Nummern in Übersicht und Schau folgen der Reihenfolge der Schau, nicht den Repository-Namen. Die Repositories behalten ihre Namen, damit alle Adressen gültig bleiben.
 
@@ -34,11 +34,15 @@ Die Übersicht selbst ist der Planschrank: neutrales Papier `#eceae4` und Grafit
 
 ## Eine durchgehende Schau
 
-Die Demos laufen als eine Schau nacheinander. Wenn eine Demo oder eine ihrer Varianten zu Ende gespielt ist, schließt ein Übergang das Bild, und die nächste lädt und spielt sich von selbst ab: zuerst Demo 1, dann Demo 2, Demo 3, Demo 4 mit A, B und C, Demo 5 mit A und C, Demo 6 mit A, B und C und danach wieder Demo 1. Eigenes Scrollen, Tippen oder Klicken übernimmt jederzeit, der Knopf unten in der Mitte gibt die Steuerung zurück. In der Übersicht folgt die Leiste oben der laufenden Demo.
+Die Demos laufen als eine Schau nacheinander. Wenn eine Demo oder eine ihrer Varianten zu Ende gespielt ist, schließt ein Übergang das Bild, und die nächste lädt und spielt sich von selbst ab: zuerst Demo 1, dann Demo 2, Demo 3, Demo 4 mit A, B und C, Demo 5 mit A und C, Demo 6 mit seinen drei Blättern (Planblatt, Geschossweise, Abwicklung) und danach wieder Demo 1. Eigenes Scrollen, Tippen oder Klicken übernimmt jederzeit, der Knopf unten in der Mitte gibt die Steuerung zurück. In der Übersicht folgt die Leiste oben der laufenden Demo.
 
 Das steuert [`portfolio.js`](portfolio.js) in diesem Repository. Alle Demos außer der Blaupause binden es über `/threejs-demos/portfolio.js` ein; die Blaupause (Demo 6, Repository `threejs-demo-1`) übergibt am Ende selbst an Demo 1, das Kartonmodell. `?autoplay=1` startet eine Demo von selbst, `?noshow` schaltet die Schau für eine Seite ab.
 
 Jede Demo liegt in einem eigenen Repository mit eigener GitHub-Pages-Seite. Die Übersicht lädt sie über relative Pfade (`../threejs-demo-1/` usw.), funktioniert also nur zusammen mit den sechs Demo-Seiten unter derselben Adresse.
+
+## Fotorealismus
+
+Wo eine Demo ihr Haus in Farbe zeigt, steht oben rechts ein kleiner Schalter: „3D-Modell | Fotorealismus“. Er kommt aus [`foto.js`](foto.js) in diesem Repository, das jede Demo über `/threejs-demos/foto.js` einbindet; dort steht auch, an welchen Stellen des Scrollwegs jede Demo ihn zeigt. Die zweite Option ist vorerst ein Versprechen: Ein Klick darauf ändert noch nichts. Später zeigt sie an diesen Stellen gerenderte Bilder.
 
 ## So sind sie gebaut
 

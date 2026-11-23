@@ -17,15 +17,15 @@
   // 1 Kartonmodell (threejs-demo-6), 2 Bauzeitraffer (-4), 3 Schnitt-Scan (-2), 4 Bauzeitenplan (-5),
   // 5 Offener Schnitt (-3), 6 Explosionsaxonometrie (-1)
   const SHOW = [
-    { demo: 1, path: '/threejs-demo-6/', name: 'Es beginnt auf dem Tisch', dur: 62, start: 4 },
-    { demo: 2, path: '/threejs-demo-4/', name: 'Projekt Steininger', start: 4, ...D4 },
-    { demo: 3, path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 88, start: 4 },
-    { demo: 4, path: '/threejs-demo-5/', q: 'dir=a&wk=0', name: 'Der Bauzeitenplan', start: 3, ...D5 },
-    { demo: 4, path: '/threejs-demo-5/', q: 'dir=b&wk=0', name: 'Plan im Maßstab 1:1', start: 3, ...D5 },
-    { demo: 4, path: '/threejs-demo-5/', q: 'dir=c&wk=0', name: 'Baustellenkamera', start: 3, ...D5 },
-    { demo: 5, path: '/threejs-demo-3/', q: 'dir=a', name: 'Objektiv öffnen', dur: 48, start: 5 },
-    { demo: 5, path: '/threejs-demo-3/', q: 'dir=c', name: 'Die Treppe hinab', dur: 40, start: 5 },
-    { demo: 6, own: true, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
+    { demo: 1, title: 'Kartonmodell', path: '/threejs-demo-6/', name: 'Es beginnt auf dem Tisch', dur: 62, start: 4 },
+    { demo: 2, title: 'Bauzeitraffer', path: '/threejs-demo-4/', name: 'Projekt Steininger', start: 4, ...D4 },
+    { demo: 3, title: 'Schnitt-Scan', path: '/threejs-demo-2/', name: 'Das Haus im Schnitt', dur: 88, start: 4 },
+    { demo: 4, title: 'Bauzeitenplan', path: '/threejs-demo-5/', q: 'dir=a&wk=0', name: 'Der Bauzeitenplan', start: 3, ...D5 },
+    { demo: 4, title: 'Bauzeitenplan', path: '/threejs-demo-5/', q: 'dir=b&wk=0', name: 'Plan im Maßstab 1:1', start: 3, ...D5 },
+    { demo: 4, title: 'Bauzeitenplan', path: '/threejs-demo-5/', q: 'dir=c&wk=0', name: 'Baustellenkamera', start: 3, ...D5 },
+    { demo: 5, title: 'Offener Schnitt', path: '/threejs-demo-3/', q: 'dir=a', name: 'Objektiv öffnen', dur: 48, start: 5 },
+    { demo: 5, title: 'Offener Schnitt', path: '/threejs-demo-3/', q: 'dir=c', name: 'Die Treppe hinab', dur: 40, start: 5 },
+    { demo: 6, title: 'Explosionsaxonometrie', own: true, path: '/threejs-demo-1/', q: 'dir=a&chain=1&play=1', name: 'Planblatt' },
   ];
   const Q = new URLSearchParams(location.search);
   if (Q.has('rec') || Q.has('drive') || Q.has('shot') || Q.has('noshow')) return;     // recordings and stills stay still
@@ -123,7 +123,7 @@
     if (b && !ST.on(b)) b.click();
   }
   const takeOver = e => {
-    if (e.target instanceof Element && e.target.closest('#pf-pill')) return;
+    if (e.target instanceof Element && e.target.closest('#pf-pill, #foto-opt')) return;   // the show's own pill, and the Fotorealismus switch (foto.js)
     if (goT >= 0) return;
     if (playing) setPlaying(false);
   };

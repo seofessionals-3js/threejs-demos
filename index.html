@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>three.js Demos</title>
-<meta name="description" content="three.js Demos: sechs Wege, eine flache Architekturzeichnung in ein 3D-Scroll-Erlebnis zu verwandeln, in reinem three.js.">
+<title>three.js Demos · Ihr Bauprojekt im Browser</title>
+<meta name="description" content="three.js Demos: sechs Wege, ein Bauprojekt im Browser begehbar zu machen. Direkt auf Ihrer Website, unter jedem Projekt, auf jedem Gerät, ohne App und ohne Download.">
 <meta name="theme-color" content="#f6f5f1">
 <link rel="preload" href="fonts/BBHBogle-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Arimo-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
@@ -335,22 +335,41 @@
   }
   .matrix-head h2 {
     margin: 0;
-    font: 400 24px/1.1 var(--display);
+    font: 400 clamp(22px, 2.6vw, 34px)/1.08 var(--display);
     letter-spacing: 0.03em;
     text-transform: uppercase;
   }
   .matrix-head p {
-    margin: 6px 0 0;
-    max-width: 68ch;
-    font: 400 13px/1.45 var(--sans);
+    margin: 8px 0 0;
+    max-width: 72ch;
+    font: 400 14px/1.5 var(--sans);
     color: var(--soft);
   }
+  .matrix-head .eyebrow {
+    margin: 0 0 8px;
+    font: 700 10.5px/1 var(--mono);
+    letter-spacing: 0.12em;
+    color: var(--mute);
+  }
+  /* what it means for a builder's website: three plain promises above the six sheets */
+  .pitch {
+    max-width: 1360px;
+    margin: 0 auto 20px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .pitch li { border-left: 3px solid var(--ink); padding: 2px 0 2px 12px; }
+  .pitch b { display: block; font: 700 11px/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+  .pitch span { display: block; margin-top: 4px; font: 400 13px/1.45 var(--sans); color: var(--soft); }
 
   .matrix-grid {
     max-width: 1360px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 14px;
   }
 
@@ -454,6 +473,7 @@
     .act-btn .long { display: none; }
     .matrix-head { flex-direction: column; align-items: flex-start; }
     .matrix-head h2 { font-size: 20px; }
+    .pitch { grid-template-columns: 1fr; gap: 10px; }
     .matrix-grid { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -475,7 +495,7 @@
   <div class="active-meta">
     <div class="active-title">
       <span class="code" id="cur-code">ATELIER 1:100 // MDL-01</span>
-      <span class="name" id="cur-name">three.js Demo 1</span>
+      <span class="name" id="cur-name">Kartonmodell</span>
       <span class="medium" id="cur-medium"></span>
     </div>
     <div class="variant-group" id="cur-variants"></div>
@@ -494,13 +514,19 @@
 <div id="matrix-drawer">
   <div class="matrix-head">
     <div>
-      <h2>THREE.JS // SECHS TECHNIKEN [01 BIS 06]</h2>
-      <p>Sechs Techniken, sechs Zeichenmedien: Jede Technik ist in ihrem eigenen Planmedium gezeichnet, vom Kartonmodell auf der Schneidematte bis zur Blaupause. Wählen Sie eine Technik oder eine ihrer Varianten. Jede läuft live in Ihrem Browser.</p>
+      <p class="eyebrow">THREE.JS // SECHS TECHNIKEN [01 BIS 06]</p>
+      <h2>Ihr Bauprojekt, im Browser begehbar</h2>
+      <p>Sechs Wege, aus Plänen und Zeichnungen ein 3D-Erlebnis zu machen, durch das Ihre Kunden einfach scrollen. Jede dieser Ansichten kann auf Ihrer Website stehen, direkt unter dem jeweiligen Bauprojekt. Wählen Sie eine Technik: Sie läuft live, hier in diesem Fenster.</p>
     </div>
     <div style="display:flex; gap:10px;">
-      <button class="act-btn on" id="close-matrix" style="padding:9px 14px;">SCHLIESSEN ✕</button>
+      <button class="act-btn on" id="close-matrix" style="padding:9px 14px;">ZUR DEMO →</button>
     </div>
   </div>
+  <ul class="pitch">
+    <li><b>Direkt im Browser</b><span>Keine App, kein Download, keine Anmeldung. Ein Link genügt, und das Projekt öffnet sich wie jede andere Seite.</span></li>
+    <li><b>Auf jedem Gerät</b><span>Handy, Tablet oder Laptop: Die Darstellung passt sich dem Gerät an. Niemand braucht einen starken Rechner oder besondere Hardware.</span></li>
+    <li><b>Unter jedem Bauprojekt</b><span>Jedes Projekt auf Ihrer Website bekommt seine eigene Ansicht, vom Rohbau bis zur Übergabe, auf Wunsch mit fotorealistischen Bildern.</span></li>
+  </ul>
   <div class="matrix-grid" id="matrix-grid"></div>
 </div>
 
@@ -518,9 +544,9 @@ const DEMOS = [
     "accent": "#2a7a57", "on": "#f5f2ea", "ink": "#20674a",
     "stage": "#323841",
     "code": "ATELIER 1:100 // MDL-01",
-    "title": "three.js Demo 1",
+    "title": "Kartonmodell",
     "short": "Kartonmodell",
-    "desc": "Ein weißes Kartonmodell abends auf der Schneidematte. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus, mit der Schreibtischlampe als Sonne.",
+    "desc": "Vom Modell zum fertigen Haus. Ihr Kunde taucht in ein Architekturmodell auf dem Schreibtisch ein, das Modell wird vor seinen Augen zum gebauten Haus mit Holzfassade und Licht in den Fenstern, und er geht durch die Glastür bis hinauf ins Arbeitszimmer. So lässt sich ein Bauprojekt zeigen, lange bevor der erste Stein liegt.",
     "variants": [
       {
         "label": "Demo",
@@ -535,9 +561,9 @@ const DEMOS = [
     "sheet": "#f5f4ef", "line": "#17191c", "mark": "#d43a2a",
     "accent": "#d43a2a", "on": "#fbfaf7", "ink": "#bf2f20",
     "code": "PROJEKT STEININGER // A-901",
-    "title": "three.js Demo 2",
+    "title": "Bauzeitraffer",
     "short": "Bauzeitraffer",
-    "desc": "Sechs Zeichnungen von Projekt Steininger, Phase für Phase. Tauchen Sie in die erste ein, sehen Sie die Baustelle aus Scanlinien entstehen und gehen Sie durch drei Geschosse, die sich Woche für Woche einrichten, bis zur Übergabe am Pool.",
+    "desc": "Ein Bauprojekt im Zeitraffer. Sechs Zeichnungen, sechs Bauphasen: Die Baustelle entsteht von der Baugrube bis zur Übergabe, dann geht Ihr Kunde durch drei Geschosse, die sich Woche für Woche einrichten. Auf der Projektseite sieht ein Bauherr so auf einen Blick, wie sein Haus entsteht.",
     "variants": [
       {
         "label": "Demo",
@@ -552,9 +578,9 @@ const DEMOS = [
     "sheet": "#e9e7e0", "line": "#1b1c1e", "mark": "#e07a12",
     "accent": "#e07a12", "on": "#1b1c1e", "ink": "#a85400",
     "code": "COTA // SWP-03",
-    "title": "three.js Demo 3",
+    "title": "Schnitt-Scan",
     "short": "Schnitt-Scan",
-    "desc": "Eine Schnittzeichnung öffnet sich in die Tiefe. Ein Scan macht aus Tusche Material und aus den gezeichneten Sonnenwinkeln echte Sonnenstrahlen. Dann gehen Sie durch den Schnitt hinein.",
+    "desc": "Ein Schnitt, der sich öffnet. Aus der Zeichnung wird Material, aus den gezeichneten Sonnenwinkeln werden echte Sonnenstrahlen, und Ihr Kunde geht durch den Schnitt ins Haus hinein. Zeigt Aufbau, Raumhöhen und Tageslicht so, dass es jeder versteht, auch ohne Pläne lesen zu können.",
     "variants": [
       {
         "label": "Demo",
@@ -569,9 +595,9 @@ const DEMOS = [
     "sheet": "#eeedea", "line": "#3d3492", "mark": "#ffd23c",
     "accent": "#3d3492", "on": "#eeedea", "ink": "#3d3492",
     "code": "PROJEKT STEININGER // A-905",
-    "title": "three.js Demo 4",
+    "title": "Bauzeitenplan",
     "short": "Bauzeitenplan",
-    "desc": "Der Bauzeitenplan von Projekt Steininger. Scrollen Sie durch 38 Wochen, und das Travertinhaus am Hang baut sich Balken für Balken selbst, samt Turmdrehkran. Dann öffnet sich die Tür zum Hof, und Sie gehen hinein bis an den Pool.",
+    "desc": "Der Bauzeitenplan zum Durchscrollen. 38 Wochen, Gewerk für Gewerk: Mit jedem Balken des Plans baut sich das Haus am Hang ein Stück weiter, samt Kran. Am Ende öffnet sich die Tür, und es geht hinein bis an den Pool. Bauherren sehen jederzeit, was wann passiert und wo ihr Projekt gerade steht.",
     "variants": [
       {
         "label": "A · Bauzeitenplan",
@@ -594,9 +620,9 @@ const DEMOS = [
     "sheet": "#f3ebdb", "line": "#3b2f27", "mark": "#cf7d68",
     "accent": "#1b7a8c", "on": "#f9f3e7", "ink": "#17667a",
     "code": "POCHÉ // SEC-05",
-    "title": "three.js Demo 5",
+    "title": "Offener Schnitt",
     "short": "Offener Schnitt",
-    "desc": "Ein flacher Schnitt zeichnet sich selbst. Dann öffnet sich das Objektiv, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene vom Schnitt aus.",
+    "desc": "Vom Plan in den Raum. Ein flacher Schnitt zeichnet sich selbst, dann öffnet sich das Objektiv, und die Kamera besucht jede Ebene des Hauses. Aus einer Zeichnung, die sonst nur Fachleute lesen, wird ein Rundgang, den Ihr Kunde auf dem Handy mit dem Daumen steuert.",
     "variants": [
       {
         "label": "A · Objektiv öffnen",
@@ -615,21 +641,21 @@ const DEMOS = [
     "sheet": "#1e4a8c", "line": "#f3f6fb", "mark": "#f4b63f",
     "accent": "#1e4a8c", "on": "#f3f6fb", "ink": "#1e4a8c",
     "code": "PURLIN // AXO-06",
-    "title": "three.js Demo 6",
+    "title": "Explosionsaxonometrie",
     "short": "Explosionsaxo",
-    "desc": "Eine Explosionsaxonometrie als Blaupause setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein.",
+    "desc": "Schicht für Schicht. Bodenplatte, Wände, Decke, Fassade, Dach: Das Haus setzt sich in der Reihenfolge zusammen, in der es gebaut wird. Dann geht es auf Augenhöhe hinein. Zeigt Bauweise und Qualität im Detail, also das, was nach der Fertigstellung niemand mehr sieht.",
     "variants": [
       {
         "label": "A · Planblatt",
         "url": "../threejs-demo-1/index.html?dir=a"
       },
       {
-        "label": "B · Abwicklung",
-        "url": "../threejs-demo-1/index.html?dir=b"
+        "label": "B · Geschossweise",
+        "url": "../threejs-demo-1/index.html?dir=c"
       },
       {
-        "label": "C · Geschossweise",
-        "url": "../threejs-demo-1/index.html?dir=c"
+        "label": "C · Abwicklung",
+        "url": "../threejs-demo-1/index.html?dir=b"
       }
     ]
   }
@@ -723,7 +749,9 @@ DEMOS.forEach((d, idx) => {
   matrixGrid.appendChild(card);
 });
 
+let staged = true; // false while the drawer is the front page and no demo has been loaded yet
 function setMatrixOpen(open) {
+  if (!open && !staged) { staged = true; selectDemo(activeIdx, activeVarIdx, false); }
   matrixDrawer.classList.toggle('open', open);
   toggleMatrixBtn.classList.toggle('on', open);
   toggleMatrixBtn.setAttribute('aria-expanded', String(open));
@@ -736,6 +764,7 @@ toggleMatrixBtn.addEventListener('click', () => {
 document.getElementById('close-matrix').addEventListener('click', () => setMatrixOpen(false));
 
 function selectDemo(idx, vIdx = 0, pushHash = true) {
+  staged = true;
   const encodedUrl = markActive(idx, vIdx, pushHash);
   // Release previous WebGL context cleanly before loading next Three.js scene
   const token = ++loadToken;
@@ -843,9 +872,10 @@ window.addEventListener('hashchange', () => {
   selectDemo(idx, vIdx, false);
 });
 
-// Initialize on 01 (or URL hash if present)
-const init = location.hash ? parseHash() : { idx: 0, vIdx: 0 };
-selectDemo(init.idx, init.vIdx, false);
+// A link with a hash opens that demo at once. Without one the drawer is the front page: what this is, and the six
+// sheets to choose from. The first demo loads when the drawer closes, so it plays its opening for someone who watches.
+if (location.hash) { const init = parseHash(); selectDemo(init.idx, init.vIdx, false); }
+else { staged = false; markActive(0, 0, false); setMatrixOpen(true); }
 </script>
 </body>
 </html>
