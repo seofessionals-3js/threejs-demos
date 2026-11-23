@@ -2,6 +2,8 @@
 
 Ganz Dortmund als interaktive 3D-Karte in three.js: 26 × 23 km, jede Straße, jedes Gewässer, jede Grünfläche und rund 379.000 Gebäude aus OpenStreetMap. Sechs erfundene Neubauprojekte stehen darauf, jedes als kleiner Lageplan mit seinen Häusern: freie Grundstücke grün, verkaufte rot. Ein Klick öffnet die Karte des Projekts, „Entdecken" lädt seine eigene Seite: das Gebäude in seiner echten Nachbarschaft, drehbar, mit Datenblatt.
 
+Die Karte ist die Startseite des Wohnungsfinders. Die Häuser der Projekte liegen im Repository [`threejs-demo-7`](https://github.com/seofessionals-3js/threejs-demo-7), dessen Startadresse hierher führt und dessen Seiten oben den Weg „Zur Karte“ haben. Mit den three.js Demos nebenan, ihrer Übersicht und ihrer Schau, hat beides nichts zu tun.
+
 Vorbild für Aufbau und Funktionen ist die Dubai-Karte von Todor3D für Evolutions: eine Kartenseite, eine Seite pro Immobilie.
 
 ## Was die Seite kann

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>three.js Demos</title>
-<meta name="description" content="three.js Demos: sieben Wege, eine flache Architekturzeichnung in ein 3D-Scroll-Erlebnis zu verwandeln, in reinem three.js.">
+<meta name="description" content="three.js Demos: sechs Wege, eine flache Architekturzeichnung in ein 3D-Scroll-Erlebnis zu verwandeln, in reinem three.js.">
 <meta name="theme-color" content="#f6f5f1">
 <link rel="preload" href="fonts/BBHBogle-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Arimo-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* The plan chest: neutral paper and graphite. The one colour on the page is the identity colour of the demo
-     that is running (--accent), so the frame never competes with the seven drawing media inside it. */
+     that is running (--accent), so the frame never competes with the six drawing media inside it. */
   @font-face { font-family: 'BBH Bogle'; src: url('fonts/BBHBogle-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
   @font-face { font-family: 'Arimo'; src: url('fonts/Arimo-VariableFont_wght.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
   :root {
@@ -23,10 +23,10 @@
     --line: rgba(29, 29, 27, 0.14);
     --line-strong: rgba(29, 29, 27, 0.3);
     --hover: rgba(29, 29, 27, 0.06);
-    --accent: #1e4a8c;      /* identity colour of the running demo, set from DEMOS */
-    --accent-on: #f3f6fb;   /* text on the identity colour */
-    --accent-ink: #1e4a8c;  /* the identity colour, dark enough for small text on paper */
-    --sheet: #1e4a8c;       /* the sheet of the running demo: shown behind the stage while it loads */
+    --accent: #2a7a57;      /* identity colour of the running demo, set from DEMOS */
+    --accent-on: #f5f2ea;   /* text on the identity colour */
+    --accent-ink: #20674a;  /* the identity colour, dark enough for small text on paper */
+    --sheet: #323841;       /* the sheet of the running demo: shown behind the stage while it loads */
     --display: 'BBH Bogle', 'Arimo', 'Arial Black', sans-serif;
     --sans: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
     --mono: 'Arimo', 'Helvetica Neue', Arial, sans-serif;
@@ -97,7 +97,7 @@
   }
   .brand-cell .tag { color: var(--mute); font-weight: 500; }
 
-  /* 01..07 number strip */
+  /* 01..06 number strip */
   .num-strip {
     display: flex;
     align-items: stretch;
@@ -305,7 +305,7 @@
     background: transparent;
   }
 
-  /* ── THE DRAWER: seven sheets, each with the colour card of its medium ── */
+  /* ── THE DRAWER: six sheets, each with the colour card of its medium ── */
   #matrix-drawer {
     position: fixed;
     top: var(--bar-h);
@@ -464,18 +464,18 @@
 <body>
 
 <header id="master-bar">
-  <button class="brand-cell" id="toggle-matrix" title="Alle sieben Techniken zeigen">
+  <button class="brand-cell" id="toggle-matrix" title="Alle sechs Techniken zeigen">
     <span class="dot"></span>
-    <span>THREE.JS // 07</span>
+    <span>THREE.JS // 06</span>
     <span class="tag">[ÜBERSICHT]</span>
   </button>
 
-  <nav class="num-strip" id="num-strip" aria-label="Techniken 01 bis 07"></nav>
+  <nav class="num-strip" id="num-strip" aria-label="Techniken 01 bis 06"></nav>
 
   <div class="active-meta">
     <div class="active-title">
-      <span class="code" id="cur-code">KREIDEGASSE // ELV-01</span>
-      <span class="name" id="cur-name">Wohnungsfinder</span>
+      <span class="code" id="cur-code">ATELIER 1:100 // MDL-01</span>
+      <span class="name" id="cur-name">three.js Demo 1</span>
       <span class="medium" id="cur-medium"></span>
     </div>
     <div class="variant-group" id="cur-variants"></div>
@@ -489,13 +489,13 @@
   </div>
 </header>
 
-<button id="show-bar-tab" title="Leiste anzeigen">▾ THREE.JS // 07</button>
+<button id="show-bar-tab" title="Leiste anzeigen">▾ THREE.JS // 06</button>
 
 <div id="matrix-drawer">
   <div class="matrix-head">
     <div>
-      <h2>THREE.JS // SIEBEN TECHNIKEN [01 BIS 07]</h2>
-      <p>Sieben Häuser, sieben Zeichenmedien: Jede Technik ist in ihrem eigenen Planmedium gezeichnet, von der Blaupause bis zur Kreide auf Tonpapier. Wählen Sie eine Technik oder eine ihrer Varianten. Jede läuft live in Ihrem Browser.</p>
+      <h2>THREE.JS // SECHS TECHNIKEN [01 BIS 06]</h2>
+      <p>Sechs Techniken, sechs Zeichenmedien: Jede Technik ist in ihrem eigenen Planmedium gezeichnet, vom Kartonmodell auf der Schneidematte bis zur Blaupause. Wählen Sie eine Technik oder eine ihrer Varianten. Jede läuft live in Ihrem Browser.</p>
     </div>
     <div style="display:flex; gap:10px;">
       <button class="act-btn on" id="close-matrix" style="padding:9px 14px;">SCHLIESSEN ✕</button>
@@ -512,37 +512,47 @@
 const DEMOS = [
   {
     "id": "01",
-    "medium": "Trois crayons auf Tonpapier",
-    "house": "No. 7 Kreidegasse",
-    "sheet": "#dfd2ba", "line": "#2a2522", "mark": "#a5432b",
-    "accent": "#a5432b", "on": "#fcf9f2", "ink": "#8f3620",
-    "code": "KREIDEGASSE // ELV-01",
-    "title": "Wohnungsfinder",
-    "short": "Wohnungsfinder",
-    "desc": "Eine Vorderansicht in Kreide auf Tonpapier, deren Schraffur der echte Schatten ist. Ein Scan verwandelt sie in Backstein, die Sonne wandert, die Tür öffnet sich, und Sie gehen hinein.",
+    "medium": "Kartonmodell auf der Schneidematte",
+    "house": "Haus Passepartout",
+    "sheet": "#2a7a57", "line": "#f5f2ea", "mark": "#f2a531",
+    "accent": "#2a7a57", "on": "#f5f2ea", "ink": "#20674a",
+    "stage": "#323841",
+    "code": "ATELIER 1:100 // MDL-01",
+    "title": "three.js Demo 1",
+    "short": "Kartonmodell",
+    "desc": "Ein weißes Kartonmodell abends auf der Schneidematte. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus, mit der Schreibtischlampe als Sonne.",
     "variants": [
       {
-        "label": "A · Eine Tür",
-        "url": "../threejs-demo-7/a-one-door/index.html"
-      },
-      {
-        "label": "B · Die Reihe",
-        "url": "../threejs-demo-7/b-the-row/index.html"
-      },
-      {
-        "label": "C · Die Fassade",
-        "url": "../threejs-demo-7/c-the-face/index.html"
+        "label": "Demo",
+        "url": "../threejs-demo-6/index.html"
       }
     ]
   },
   {
     "id": "02",
+    "medium": "Bauzeichnung nach Norm",
+    "house": "Projekt Steininger",
+    "sheet": "#f5f4ef", "line": "#17191c", "mark": "#d43a2a",
+    "accent": "#d43a2a", "on": "#fbfaf7", "ink": "#bf2f20",
+    "code": "PROJEKT STEININGER // A-901",
+    "title": "three.js Demo 2",
+    "short": "Bauzeitraffer",
+    "desc": "Sechs Zeichnungen von Projekt Steininger, Phase für Phase. Tauchen Sie in die erste ein, sehen Sie die Baustelle aus Scanlinien entstehen und gehen Sie durch drei Geschosse, die sich Woche für Woche einrichten, bis zur Übergabe am Pool.",
+    "variants": [
+      {
+        "label": "Demo",
+        "url": "../threejs-demo-4/index.html"
+      }
+    ]
+  },
+  {
+    "id": "03",
     "medium": "Tusche auf Transparentpapier",
     "house": "Haus Linie",
     "sheet": "#e9e7e0", "line": "#1b1c1e", "mark": "#e07a12",
     "accent": "#e07a12", "on": "#1b1c1e", "ink": "#a85400",
-    "code": "COTA // SWP-02",
-    "title": "three.js Demo 2",
+    "code": "COTA // SWP-03",
+    "title": "three.js Demo 3",
     "short": "Schnitt-Scan",
     "desc": "Eine Schnittzeichnung öffnet sich in die Tiefe. Ein Scan macht aus Tusche Material und aus den gezeichneten Sonnenwinkeln echte Sonnenstrahlen. Dann gehen Sie durch den Schnitt hinein.",
     "variants": [
@@ -553,51 +563,13 @@ const DEMOS = [
     ]
   },
   {
-    "id": "03",
-    "medium": "Aquarell auf Bütten",
-    "house": "Casa Dos, Deià",
-    "sheet": "#f3ebdb", "line": "#3b2f27", "mark": "#cf7d68",
-    "accent": "#1b7a8c", "on": "#f9f3e7", "ink": "#17667a",
-    "code": "POCHÉ // SEC-03",
-    "title": "three.js Demo 3",
-    "short": "Offener Schnitt",
-    "desc": "Ein flacher Schnitt zeichnet sich selbst. Dann öffnet sich das Objektiv, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene vom Schnitt aus.",
-    "variants": [
-      {
-        "label": "A · Objektiv öffnen",
-        "url": "../threejs-demo-3/index.html?dir=a"
-      },
-      {
-        "label": "C · Die Treppe hinab",
-        "url": "../threejs-demo-3/index.html?dir=c"
-      }
-    ]
-  },
-  {
     "id": "04",
-    "medium": "Bauzeichnung nach Norm",
-    "house": "Projekt Steininger",
-    "sheet": "#f5f4ef", "line": "#17191c", "mark": "#d43a2a",
-    "accent": "#d43a2a", "on": "#fbfaf7", "ink": "#bf2f20",
-    "code": "PROJEKT STEININGER // A-901",
-    "title": "three.js Demo 4",
-    "short": "Bau-Zeitraffer",
-    "desc": "Sechs Zeichnungen von Projekt Steininger, Phase für Phase. Tauchen Sie in die erste ein, sehen Sie die Baustelle aus Scanlinien entstehen und gehen Sie durch drei Geschosse, die sich Woche für Woche einrichten, bis zur Übergabe am Pool.",
-    "variants": [
-      {
-        "label": "Demo",
-        "url": "../threejs-demo-4/index.html"
-      }
-    ]
-  },
-  {
-    "id": "05",
     "medium": "Lichtpause mit Textmarker",
     "house": "Projekt Steininger",
     "sheet": "#eeedea", "line": "#3d3492", "mark": "#ffd23c",
     "accent": "#3d3492", "on": "#eeedea", "ink": "#3d3492",
     "code": "PROJEKT STEININGER // A-905",
-    "title": "three.js Demo 5",
+    "title": "three.js Demo 4",
     "short": "Bauzeitenplan",
     "desc": "Der Bauzeitenplan von Projekt Steininger. Scrollen Sie durch 38 Wochen, und das Travertinhaus am Hang baut sich Balken für Balken selbst, samt Turmdrehkran. Dann öffnet sich die Tür zum Hof, und Sie gehen hinein bis an den Pool.",
     "variants": [
@@ -616,30 +588,34 @@ const DEMOS = [
     ]
   },
   {
-    "id": "06",
-    "medium": "Kartonmodell auf der Schneidematte",
-    "house": "Haus Passepartout",
-    "sheet": "#2a7a57", "line": "#f5f2ea", "mark": "#f2a531",
-    "accent": "#2a7a57", "on": "#f5f2ea", "ink": "#20674a",
-    "code": "ATELIER 1:100 // MDL-06",
-    "title": "three.js Demo 6",
-    "short": "Kartonmodell",
-    "desc": "Ein weißes Kartonmodell abends auf der Schneidematte. Tauchen Sie hinab zur Maßstabsfigur, und der Karton wird zum echten Haus, mit der Schreibtischlampe als Sonne.",
+    "id": "05",
+    "medium": "Aquarell auf Bütten",
+    "house": "Casa Dos, Deià",
+    "sheet": "#f3ebdb", "line": "#3b2f27", "mark": "#cf7d68",
+    "accent": "#1b7a8c", "on": "#f9f3e7", "ink": "#17667a",
+    "code": "POCHÉ // SEC-05",
+    "title": "three.js Demo 5",
+    "short": "Offener Schnitt",
+    "desc": "Ein flacher Schnitt zeichnet sich selbst. Dann öffnet sich das Objektiv, während der Schnitt seine Größe behält, und die Kamera besucht jede Ebene vom Schnitt aus.",
     "variants": [
       {
-        "label": "Demo",
-        "url": "../threejs-demo-6/index.html"
+        "label": "A · Objektiv öffnen",
+        "url": "../threejs-demo-3/index.html?dir=a"
+      },
+      {
+        "label": "C · Die Treppe hinab",
+        "url": "../threejs-demo-3/index.html?dir=c"
       }
     ]
   },
   {
-    "id": "07",
+    "id": "06",
     "medium": "Blaupause",
     "house": "Haus Karbon",
     "sheet": "#1e4a8c", "line": "#f3f6fb", "mark": "#f4b63f",
     "accent": "#1e4a8c", "on": "#f3f6fb", "ink": "#1e4a8c",
-    "code": "PURLIN // AXO-07",
-    "title": "three.js Demo 7",
+    "code": "PURLIN // AXO-06",
+    "title": "three.js Demo 6",
     "short": "Explosionsaxo",
     "desc": "Eine Explosionsaxonometrie als Blaupause setzt sich Schicht für Schicht in Bauabfolge zusammen. Dann weitet sich das Objektiv auf Augenhöhe, und Sie gehen hinein.",
     "variants": [
@@ -783,7 +759,7 @@ function markActive(idx, vIdx = 0, pushHash = true) {
   R.setProperty('--accent', demo.accent);
   R.setProperty('--accent-on', demo.on);
   R.setProperty('--accent-ink', demo.ink);
-  R.setProperty('--sheet', demo.id === '06' ? '#323841' : demo.sheet);
+  R.setProperty('--sheet', demo.stage || demo.sheet);   // the Kartonmodell waits in the dusk of its studio, not on the green mat
   curMedium.textContent = `${demo.medium} · ${demo.house}`;
 
   // Update top buttons
