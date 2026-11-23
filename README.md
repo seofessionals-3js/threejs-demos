@@ -40,14 +40,10 @@ Das steuert [`portfolio.js`](portfolio.js) in diesem Repository. Alle Demos auß
 
 Jede Demo liegt in einem eigenen Repository mit eigener GitHub-Pages-Seite. Die Übersicht lädt sie über relative Pfade (`../threejs-demo-1/` usw.), funktioniert also nur zusammen mit den sechs Demo-Seiten unter derselben Adresse.
 
-## Der Wohnungsfinder gehört zur Dortmund-Karte
-
-Der Wohnungsfinder (Repository [`threejs-demo-7`](https://github.com/seofessionals-3js/threejs-demo-7)) ist keine der Demos: Er steht weder in der Übersicht noch in der Schau. Er gehört zur [Dortmund-Karte](https://seofessionals-3js.github.io/threejs-demos/dortmund/) im Ordner [`dortmund/`](dortmund/): Die Karte zeigt die Projekte, der Wohnungsfinder ihre Häuser, und von dort führt der Weg zurück zur Karte.
-
 ## So sind sie gebaut
 
 - three.js von einem CDN, dazu einfaches HTML, CSS und JavaScript. Kein Build-Schritt, nichts zu installieren.
-- Keine Bilddateien und keine 3D-Modelle. Jede Wand, jedes Material und jedes Möbelstück entsteht im Code, auch die Holz- und Ziegeloberflächen werden beim Laden auf Canvas gemalt, deshalb ist jede Demo nur etwa 100 bis 190 KB groß. (Die Dortmund-Karte im Ordner `dortmund/` ist ein eigenes Projekt mit eigenen Kartendaten.)
+- Keine Bilddateien und keine 3D-Modelle. Jede Wand, jedes Material und jedes Möbelstück entsteht im Code, auch die Holz- und Ziegeloberflächen werden beim Laden auf Canvas gemalt, deshalb ist jede Demo nur etwa 100 bis 190 KB groß.
 - In fünf der sechs Demos ist die flache Zeichnung das echte 3D-Modell, gesehen durch ein sehr langes Objektiv, das es flach wirken lässt. Erst das Öffnen des Objektivs macht daraus 3D.
 
 ## Lokal starten
@@ -58,7 +54,7 @@ Alle sieben Repositories (die Übersicht und die sechs Demos) nebeneinander in e
 python -m http.server 8000
 ```
 
-und http://localhost:8000/threejs-demos/ öffnen. Die Dortmund-Karte (http://localhost:8000/threejs-demos/dortmund/) braucht für die Häuser ihrer Projekte zusätzlich `threejs-demo-7` im selben Ordner.
+und http://localhost:8000/threejs-demos/ öffnen.
 
 ## Herkunft und Lizenz
 

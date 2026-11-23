@@ -2,7 +2,6 @@
 // one loads and plays by itself, and after the last demo the show starts again with Demo 1.
 // Every demo except the Blaupause loads this file from /threejs-demos/portfolio.js. The Blaupause (repo
 // threejs-demo-1, Nummer 6 in the show) runs its own three sheets and hands over to Nummer 1 (Kartonmodell) itself.
-// The Wohnungsfinder (repo threejs-demo-7) is not part of the show: it belongs to the Dortmund map.
 //
 //   ?autoplay=1   arrived from the demo before: show its card, then play this page by itself
 //   any wheel, touch, click or key takes over; the pill at the bottom hands it back
@@ -31,7 +30,7 @@
   const Q = new URLSearchParams(location.search);
   if (Q.has('rec') || Q.has('drive') || Q.has('shot') || Q.has('noshow')) return;     // recordings and stills stay still
   // which stop is this? the path names the repo; a dir in the query picks the variant. Only the page at the root
-  // of a repo is a stop, so a page that is not in the show (the Wohnungsfinder) stays as it is.
+  // of a repo is a stop, so any other page that loads this file stays as it is.
   const here = location.pathname.replace(/index\.html$/, '');
   const cands = SHOW.map((s, i) => [s, i]).filter(([s]) => here.endsWith(s.path));
   if (!cands.length) return;
